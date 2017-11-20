@@ -1,4 +1,4 @@
-# Format of Databases
+# Format of Tables
 
 ### Classification
 
