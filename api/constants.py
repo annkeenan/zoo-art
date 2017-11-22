@@ -1,7 +1,8 @@
 # Constants
 BASEURL = '../db/'
 CLASSIFICATION = 'classification.csv'
-EXHIBIT = 'habitat.csv'
+EXHIBIT = 'exhibit.csv'
+HABITAT = 'habitat.csv'
 REGION = 'region.csv'
 SPECIES = 'species.csv'
 STATE = 'state.csv'

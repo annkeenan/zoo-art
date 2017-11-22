@@ -15,7 +15,7 @@
     'Class': [class],
     'Phylum': [phylum],
     'Kingdom': [kingdom],
-    'Description': [description],
+    'Desc': ([name], [name], ...)
   },
   ...
 }
@@ -53,12 +53,12 @@
 ```
 {
   [species]: {
-    'Common Name': [common name],
+    'Common Name': ([common name], [common name], ...),
     'Genus': [genus],
     'Family': [family],
     'Region': [region],
     'Habitat': [habitat],
-    'Status': [status],
+    'Status': [status]
   },
   ...
 }
@@ -79,7 +79,7 @@
 {
   [level]: {
     'Status': [status],
-    'Description': [description]
+    'Desc': [description]
   },
   ...
 }
@@ -98,7 +98,7 @@
     'Opening Time': [opening time],
     'Closing Time': [closing time].
     'Annual Visitors': [annual visitors],
-    'Website URL': [website url],
+    'Website URL': [website url]
   },
   ...
 }
