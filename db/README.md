@@ -13,7 +13,7 @@
 - Family
 - Order
 - Class
-- Phylm
+- Phylum
 - Kingdom
 - Description
 
