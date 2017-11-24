@@ -57,3 +57,52 @@ class _zoo_database:
 
     def get_region(self, region):
         return self.region[region]
+    
+    # State table 
+    def load_state(self):
+        with open(BASEURL+STATE) as sf:
+            for line in sf:
+                abbrev, state = line.rstrip().split(',')
+                self.state[abbrev] = state
+
+    def get_state(self, abbrev):
+        return self.state[abbrev]
+
+    # Species Table
+    def load_species(self):
+        with open(BASEURL+SPECIES) as spf:
+            for line in spf:
+                species, common_name, genus, family, region, habitat, status = line.rstrip().split(',')
+                common_names = set()
+                habitats = set()
+
+                for name in common_name.split(';'):
+                    common_names.add(name)
+                for hab in habitat.split(';'):
+                    habitats.add(hab)
+
+                self.species[species] = {
+                    'Common Name': common_names,
+                    'Genus': genus,
+                    'Family': family,
+                    'Region': region,
+                    'Habitat': habitats,
+                    'Status': status
+                }
+
+    def get_species(self, species):
+        return self.species[species]
+
+    # Exhibit Table 
+    def load_exhibit(self):
+        with open(BASEURL+EXHIBIT) as ef:
+            for line in ef:
+                zoo, species = line.rstrip().split(',')
+                if zoo not in self.exhibit:
+                    self.exhibit[zoo] = set([species])
+                else:
+                    self.exhibit[zoo].add(species)
+
+    def get_exhibit(self, exhibit):
+        return self.exhibit[exhibit]
+   
