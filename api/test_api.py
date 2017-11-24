@@ -34,5 +34,35 @@ class TestZooDatabase(unittest.TestCase):
         result = self.zdb.get_region('nearctic')
         self.assertEquals(result, exp_result)
 
+    def test_load_state(self):
+        self.reset_database()
+        exp_result = 'North Carolina'
+        self.zdb.load_state()
+        result = self.zdb.get_state('NC')
+        self.assertEquals(result, exp_result)
+
+    def test_load_species(self):
+        self.reset_database()
+        exp_result = {
+            'Common Name': set(['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw']),
+            'Genus': 'ara',
+            'Family': 'psittacidae',
+            'Region': 'neotropical',
+            'Habitat': set(['savanna/grassland', 'forest']),
+            'Status': 'CR'
+        }
+        self.zdb.load_species()
+        result = self.zdb.get_species('ara glaucogularis')
+        self.assertEquals(result, exp_result)
+
+    def test_load_exhibit(self):
+        self.reset_database()
+        exp_result = set(['aegolius acadicus', 'buteo jamaicensis', 'buteo lagopus', 'canis lupus', 'canis lupus familiaris',
+            'cathartes aura', 'falco peregrinus', 'falco sparverius', 'haliaeetus leucocephalus', 'ursus arctos horribilis'])
+        self.zdb.load_exhibit()
+        result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
+        self.assertEquals(result, exp_result)
+
+
 if __name__ == "__main__":
     unittest.main()
