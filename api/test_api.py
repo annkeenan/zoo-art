@@ -63,6 +63,7 @@ class TestZooDatabase(unittest.TestCase):
         result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
         self.assertEquals(result, exp_result)
 
+
     def test_put_species(self):
         self.reset_database()
         exp_result = {
