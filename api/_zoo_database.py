@@ -93,6 +93,19 @@ class _zoo_database:
     def get_species(self, species):
         return self.species[species]
 
+    def put_species(self, species, info):
+        self.species[species] = info
+
+    def post_species(self, new_species):
+        self.species[new_species['Species']] = {
+                    'Common Name': new_species['Common Name'],
+                    'Genus': new_species['Genus'],
+                    'Family': new_species['Family'],
+                    'Region': new_species['Region'],
+                    'Habitat': new_species['Habitat'],
+                    'Status': new_species['Status']
+                }
+
     # Exhibit Table 
     def load_exhibit(self):
         with open(BASEURL+EXHIBIT) as ef:
@@ -104,5 +117,13 @@ class _zoo_database:
                     self.exhibit[zoo].add(species)
 
     def get_exhibit(self, exhibit):
-        return self.exhibit[exhibit]
-   
+        try:
+            return self.exhibit[exhibit]
+        except Exception as ex:
+            return None
+
+    def post_exhibit(self, new_exhibit):
+        self.exhibit[new_exhibit['zoo name']] = new_exhibit['species']
+
+    def delete_exhibit(self, exhibit): 
+        del self.exhibit[exhibit]
