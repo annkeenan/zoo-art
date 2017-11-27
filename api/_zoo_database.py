@@ -60,6 +60,9 @@ class _zoo_database:
             raise ValueError('%s is not an existing family' % family)
         return self.classification[family]
 
+    def post_classification(self, family, info):
+        self.classification[family] = info
+
 ## Exhibit table
     # Load from exhibit.csv
     def load_exhibit(self):

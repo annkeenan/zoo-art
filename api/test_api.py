@@ -27,6 +27,19 @@ class TestZooDatabase(unittest.TestCase):
         result = self.zdb.get_classication('acanthuridae')
         self.assertEqual(result, exp_result)
 
+    def test_post_classification(self):
+        self.reset_database()
+        exp_result = {
+            'order': 'perciformes',
+            'class': 'actinopterygii',
+            'phylum': 'chordata',
+            'kingdom': 'animalia',
+            'desc': {'surgeonfish', 'tang', 'unicornfish'}
+        }
+        self.zdb.post_classification('test', exp_result)
+        result = self.zdb.get_classication('test')
+        self.assertEqual(result, exp_result)
+
 ## Exhibit table tests
     def test_get_exhibits(self):
         self.reset_database()
