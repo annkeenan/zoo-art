@@ -98,32 +98,6 @@ class TestZooDatabase(unittest.TestCase):
         self.zdb.put_species('ara glaucogularis', exp_result)
         result = self.zdb.get_species('ara glaucogularis')
         self.assertEquals(result, exp_result)
-    def test_load_zoo(self):
-        self.reset_database()
-        exp_result = {
-            'City': 'Abilene',
-            'State': 'TX',
-            'Address': '2070 Zoo Lane',
-            'Number of Animals': 1100,
-            'Acres': 13,
-            'Opening Time': '9:00',
-            'Closing Time': '17:00',
-            'Annual Visitors': 175000,
-            'Website URL': 'http://abilenezoo.org/'
-        }
-        self.zdb.load_zoo()
-        result = self.zdb.get_zoo('Audubon Zoo')
-        self.assertEquals(result, exp_result)    
-           
-    def test_load_status(self):
-        self.reset_database()
-        exp_result = {
-            'Level': 0,
-            'Description': 'data deficient'
-        }
-        self.zdb.load_status()
-        result = self.zdb.get_status('DD')
-        self.assertEquals(result, exp_result)
 
     def test_post_species(self):
         self.reset_database()
@@ -149,5 +123,77 @@ class TestZooDatabase(unittest.TestCase):
         result = self.zdb.get_species('Dire wolf')
         self.assertEquals(result, exp_result)
 
+    # Zoo Tests
+    def test_put_zoo(self):
+        self.reset_database()
+        exp_result = {
+            'City': 'Abilene',
+            'State': 'TX',
+            'Address': '1234 Test Lane',
+            'Number of Animals': 420,
+            'Acres': 69,
+            'Opening Time': '9:00',
+            'Closing Time': '17:00',
+            'Annual Visitors': 175000,
+            'Website URL': 'http://abilenezoo.org/'
+        }           
+        self.zdb.put_zoo('Audubon Zoo', exp_result)
+        result = self.zdb.get_zoo('Audubon Zoo')
+        self.assertEquals(result, exp_result)
+    def test_post_zoo(self):
+        self.reset_database()
+        post_dict = {
+            'Zoo': 'Hogwarts Zoo',
+            'City': 'Yorba Linda',
+            'State': 'CA',
+            'Address': '1234 Zoo Lane',
+            'Number of Animals': 777,
+            'Acres': 19,
+            'Opening Time': '9:00',
+            'Closing Time': '17:00',
+            'Annual Visitors': 45000,
+            'Website URL': 'http://zoo.org/'
+        }
+        exp_result = {
+            'City': 'Yorba Linda',
+            'State': 'CA',
+            'Address': '1234 Zoo Lane',
+            'Number of Animals': 777,
+            'Acres': 19,
+            'Opening Time': '9:00',
+            'Closing Time': '17:00',
+            'Annual Visitors': 45000,
+            'Website URL': 'http://zoo.org/'
+        }
+        self.zdb.post_zoo(post_dict)
+        result = self.zdb.get_zoo('Hogwarts Zoo')
+        self.assertEquals(result, exp_result)
+
+    def test_load_zoo(self):
+        self.reset_database()
+        exp_result = {
+            'City': 'Abilene',
+            'State': 'TX',
+            'Address': '2070 Zoo Lane',
+            'Number of Animals': 1100,
+            'Acres': 13,
+            'Opening Time': '9:00',
+            'Closing Time': '17:00',
+            'Annual Visitors': 175000,
+            'Website URL': 'http://abilenezoo.org/'
+        }
+        self.zdb.load_zoo()
+        result = self.zdb.get_zoo('Audubon Zoo')
+        self.assertEquals(result, exp_result)    
+    # Status Tests
+    def test_load_status(self):
+        self.reset_database()
+        exp_result = {
+            'Level': 0,
+            'Description': 'data deficient'
+        }
+        self.zdb.load_status()
+        result = self.zdb.get_status('DD')
+        self.assertEquals(result, exp_result)
 if __name__ == "__main__":
     unittest.main()
