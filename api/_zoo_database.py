@@ -135,17 +135,15 @@ class _zoo_database:
 	with open(BASEURL+ZOO) as zf:
             for line in zf:
                 zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',')
-                if state not in self.state:
-                    raise ValueError('%s is not a valid state'% state)
                 self.zoo[zoo] = {
                     'City': city,
                     'State': state,
                     'Address': address,
-                    'Number of Animals': num_animals,
-                    'Acres': acres,
+                    'Number of Animals': int(num_animals),
+                    'Acres': int(acres),
                     'Opening Time': opening_time,
                     'Closing Time': closing_time,
-                    'Annual Visitors': annual_visitors,
+                    'Annual Visitors': int(annual_visitors),
                     'Website URL': website_url
                 }
                 
@@ -162,11 +160,11 @@ class _zoo_database:
             'City': new_zoo['City'],
             'State': new_zoo['State'],
             'Address': new_zoo['Address'],
-            'Number of Animals': new_zoo['Number of Animals'],
-            'Acres': new_zoo['Acres'],
+            'Number of Animals': int(new_zoo['Number of Animals']),
+            'Acres': int(new_zoo['Acres']),
             'Opening Time': new_zoo['Opening Time'],
             'Closing Time': new_zoo['Closing Time'],
-            'Annual Visitors': new_zoo['Annual Visitors'],
+            'Annual Visitors': int(new_zoo['Annual Visitors']),
             'Website URL': new_zoo['Website URL']
         }           
 
@@ -176,7 +174,7 @@ class _zoo_database:
             for line in stsf:
                 level, status, description = line.rstrip().split(',')
                 self.status[status] = {
-                    'Level': level,
+                    'Level': int(level),
                     'Description': description
                 }
            
