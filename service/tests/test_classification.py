@@ -11,7 +11,8 @@ class TestClassification(unittest.TestCase):
     RESET_URL = SITE_URL + '/reset/'
 
     def reset_data(self):
-        r = requests.put(self.RESET_URL)
+        m = {}
+        r = requests.put(self.RESET_URL, data=json.dumps(m))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
@@ -45,7 +46,7 @@ class TestClassification(unittest.TestCase):
         self.assertEqual(classification['class'], 'actinopterygii')
         self.assertEqual(classification['phylum'], 'chordata')
         self.assertEqual(classification['kingdom'], 'animalia')
-        self.assertEqual(classification['desc'], ['surgeonfish', 'tang', 'unicornfish'])
+        self.assertCountEqual(classification['desc'], ['surgeonfish', 'tang', 'unicornfish'])
 
     def test_post_classification(self):
         self.reset_data()
@@ -57,7 +58,7 @@ class TestClassification(unittest.TestCase):
             'class': 'class',
             'phylum': 'phylum',
             'kingdom': 'kingdom',
-            'desc': {'desc1', 'desc2'}
+            'desc': ['desc1', 'desc2']
         }
         # Post the request to the server
         r = requests.post(self.CLASSIFICATION_URL, data=json.dumps(m))

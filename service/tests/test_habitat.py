@@ -11,7 +11,8 @@ class TestHabitat(unittest.TestCase):
     RESET_URL = SITE_URL + '/reset/'
 
     def reset_data(self):
-        r = requests.put(self.RESET_URL)
+        m = {}
+        r = requests.put(self.RESET_URL, data=json.dumps(m))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 

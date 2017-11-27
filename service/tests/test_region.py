@@ -9,10 +9,10 @@ class TestRegion(unittest.TestCase):
     SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
     REGION_URL = SITE_URL + '/region/'
     RESET_URL = SITE_URL + '/reset/'
-    TEST = 'acanthuridae'
 
     def reset_data(self):
-        r = requests.put(self.RESET_URL)
+        m = {}
+        r = requests.put(self.RESET_URL, data=json.dumps(m))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 

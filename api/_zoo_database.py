@@ -1,14 +1,8 @@
 class _zoo_database:
     def __init__(self):
         self.BASEURL = '../db/'
-        self.classification = dict()
-        self.exhibit = dict()
-        self.habitat = dict()
-        self.region = dict()
-        self.species = dict()
-        self.state = dict()
-        self.status = dict()
-        self.zoo = dict()
+        self.reset_all()
+        self.load_all()
 
     # Recreate all dict objects
     def reset_all(self):
@@ -191,6 +185,10 @@ class _zoo_database:
         for habitat in info['habitat']:
             if habitat not in self.habitat:
                 raise ValueError('"%s" is not an existing habitat' % habitat)
+        # Convert lists to sets
+        info['common name'] = set(info['common name'])
+        info['region'] = set(info['region'])
+        info['habitat'] = set(info['habitat'])
         self.species[new_species] = info
 
 ## State table

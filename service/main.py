@@ -25,36 +25,36 @@ def CORS():
 
 
 def start_service():
-    db = _zoo_database()
+    zdb = _zoo_database._zoo_database()
 
 ## Controllers
     options_controller = _options_controller()
-    classification_controller = _classification_controller(db)
-    # exhibit_controller = _exhibit_controller(db)
-    habitat_controller = _habitat_controller(db)
-    region_controller = _region_controller(db)
-    reset_controller = _reset_controller(db)
-    # species_controller = _species_controller(db)
-    # state_controller = _state_controller(db)
-    # status_controller = _status_controller(db)
-    # zoo_controller = _zoo_controller(db)
+    classification_controller = _classification_controller(zdb)
+    # exhibit_controller = _exhibit_controller(zdb)
+    habitat_controller = _habitat_controller(zdb)
+    region_controller = _region_controller(zdb)
+    reset_controller = _reset_controller(zdb)
+    # species_controller = _species_controller(zdb)
+    # state_controller = _state_controller(zdb)
+    # status_controller = _status_controller(zdb)
+    # zoo_controller = _zoo_controller(zdb)
 
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
 ## Preflight options
     # Classification
-    dispatcher.connect(name='preflight_get_families', route='/controller/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_get_classification', route='/controller/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_post_classification', route='/controller/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_families', route='/classification/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_classification', route='/classification/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_post_classification', route='/classification/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Exhibit
     # Habitat
-    dispatcher.connect(name='preflight_get_habitats', route='/controller/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_get_habitat', route='/controller/:habitat', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_post_habitat', route='/controller/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_habitats', route='/habitat/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_habitat', route='/habitat/:habitat', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_post_habitat', route='/habitat/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Region
-    dispatcher.connect(name='preflight_get_regions', route='/controller/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_get_region', route='/controller/:region', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
-    dispatcher.connect(name='preflight_post_region', route='/controller/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_regions', route='/region/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_region', route='/region/:region', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_post_region', route='/region/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Reset
     dispatcher.connect(name='preflight_reset_all', route='/reset/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Species
@@ -64,18 +64,18 @@ def start_service():
 
 ## Options
     # Classification
-    dispatcher.connect(name='get_families', route='/controller/', controller=classification_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='get_classification', route='/controller/:family', controller=classification_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='post_classification', route='/controller/:family', controller=classification_controller, action='POST', conditions=dict(method=['POST']))
+    dispatcher.connect(name='get_families', route='/classification/', controller=classification_controller, action='get_families', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_classification', route='/classification/:family', controller=classification_controller, action='get_classification', conditions=dict(method=['GET']))
+    dispatcher.connect(name='post_classification', route='/classification/', controller=classification_controller, action='post_classification', conditions=dict(method=['POST']))
     # Exhibit
     # Habitat
-    dispatcher.connect(name='preflight_get_habitats', route='/controller/', controller=habitat_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='preflight_get_habitat', route='/controller/:habitat', controller=habitat_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='preflight_post_habitat', route='/controller/', controller=habitat_controller, action='POST', conditions=dict(method=['POST']))
+    dispatcher.connect(name='get_habitats', route='/habitat/', controller=habitat_controller, action='get_habitats', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_habitat', route='/habitat/:habitat', controller=habitat_controller, action='get_habitat', conditions=dict(method=['GET']))
+    dispatcher.connect(name='post_habitat', route='/habitat/', controller=habitat_controller, action='post_habitat', conditions=dict(method=['POST']))
     # Region
-    dispatcher.connect(name='preflight_get_regions', route='/controller/', controller=region_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='preflight_get_region', route='/controller/:region', controller=region_controller, action='GET', conditions=dict(method=['GET']))
-    dispatcher.connect(name='preflight_post_region', route='/controller/', controller=region_controller, action='POST', conditions=dict(method=['POST']))
+    dispatcher.connect(name='get_regions', route='/region/', controller=region_controller, action='get_regions', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_region', route='/region/:region', controller=region_controller, action='get_region', conditions=dict(method=['GET']))
+    dispatcher.connect(name='post_region', route='/region/', controller=region_controller, action='post_region', conditions=dict(method=['POST']))
     # Reset
     dispatcher.connect(name='reset_all', route='/reset/', controller=reset_controller, action='reset_all', conditions=dict(method=['PUT']))
     # Species
@@ -86,7 +86,7 @@ def start_service():
 ## Configuration
     conf = {
         'global': {
-            'server.socket_host': 'student04.cse.nd.edu',
+            'server.socket_host': '0.0.0.0',
             'server.socket_port': 51042,
         },
         '/': {
