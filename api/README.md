@@ -77,8 +77,8 @@
 
 ```
 {
-  [level]: {
-    'Status': [status],
+  [status]: {
+    'Level': [level],
     'Desc': [description]
   },
   ...
@@ -91,7 +91,7 @@
 {
   [zoo name]: {
     'City': [city],
-    'State': [state],
+    'State': [state abbreviation],
     'Address': [address],
     'Number of Animals': [number of animals],
     'Acres': [acres],
