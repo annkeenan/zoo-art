@@ -1,4 +1,24 @@
-# Format of Database
+## Use
+
+Classification:
+The classification holds the classification of a family, the Order, Class, Phylum, Kingdom, and Description. The programmer has the load and get methods.
+Exhibit:
+  The Exhibit database holds the Zoo Names, which are references for the Zoo database, and the Species, which are references for the Species database. The programmer has the load, post, delete, and get methods.
+Habitat:
+  The Habitat database holds the habitats and a description of the habitats. The programmer has the load and get methods.
+Region:
+  The Region database holds the regions and a description of the regions. The programmer has the load and get methods.
+Species:
+  The Species database holds the Species and its Common Names, Genus, Family (references for the Classification database), Region (references for the Region database), Habitat (references for the Habitat database), and Status (reference for the Status database). The programmer has the load, put, post, and get methods.
+State:
+  The State database holds the Abbreviation and full name for each State. The programmer has the load and get methods.
+Status:
+  The Status database holds the different Endangered Species Statuses and their corresponding Level number and description. The programmer has the load and get methods.
+Zoo:
+  The Zoo database stores the Zoo Names and their City, State (reference to the State database), Address, Number of Animals, Acres, Opening Time, Closing Time, Annual Visitors, and Website URL. The programmer has the load, put, post, and get methods.
+
+
+## Format of Database
 
 ### Notes
 
