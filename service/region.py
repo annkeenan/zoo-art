@@ -11,7 +11,7 @@ class _region_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_regions()
-            output.update(result)
+            output['regions'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -20,7 +20,7 @@ class _region_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_region(region)
-            output.update(result)
+            output['region'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -31,8 +31,7 @@ class _region_controller(object):
         rawbody = cherrypy.request.body.read(int(cl))
         data = json.loads(rawbody)
         try:
-            result = self.db.post_region(data['region'], data['desc'])
-            output.update(result)
+            self.db.post_region(data['region'], data['desc'])
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)

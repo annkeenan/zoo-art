@@ -11,7 +11,7 @@ class _habitat_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_habitats()
-            output.update(result)
+            output['habitats'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -20,7 +20,7 @@ class _habitat_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_habitat(habitat)
-            output.update(result)
+            output['habitat'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -31,8 +31,7 @@ class _habitat_controller(object):
         rawbody = cherrypy.request.body.read(int(cl))
         data = json.loads(rawbody)
         try:
-            result = self.db.post_habitat(data['habitat'], data['desc'])
-            output.update(result)
+            self.db.post_habitat(data['habitat'], data['desc'])
         except Exception as e:
-            output = {'result': 'error', 'message': str(e)}
+            output = {'result': 'error', 'messsage': str(e)}
         return json.dumps(output)

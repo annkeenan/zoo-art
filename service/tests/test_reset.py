@@ -1,5 +1,6 @@
-import unittest
+import json
 import requests
+import unittest
 
 
 class TestReset(unittest.TestCase):
@@ -9,7 +10,9 @@ class TestReset(unittest.TestCase):
     RESET_URL = SITE_URL + '/reset/'
 
     def test_reset_data(self):
-        requests.put(self.RESET_URL)
+        r = requests.put(self.RESET_URL)
+        resp = json.loads(r.content.decode())
+        self.assertEqual(resp['result'], 'success')
 
 
 if __name__ == "__main__":

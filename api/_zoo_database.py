@@ -1,6 +1,3 @@
-# Constants
-
-
 class _zoo_database:
     def __init__(self):
         self.BASEURL = '../db/'

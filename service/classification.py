@@ -11,7 +11,7 @@ class _classification_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_families()
-            output.update(result)
+            output['families'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -20,7 +20,7 @@ class _classification_controller(object):
         output = {'result': 'success'}
         try:
             result = self.db.get_classication(family)
-            output.update(result)
+            output['classification'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
@@ -31,8 +31,7 @@ class _classification_controller(object):
         rawbody = cherrypy.request.body.read(int(cl))
         data = json.loads(rawbody)
         try:
-            result = self.db.post_classication(data['family'], data['info'])
-            output.update(result)
+            self.db.post_classication(data['family'], data['info'])
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
