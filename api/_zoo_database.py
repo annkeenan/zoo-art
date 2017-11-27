@@ -135,6 +135,8 @@ class _zoo_database:
 	with open(BASEURL+ZOO) as zf:
             for line in zf:
                 zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',')
+                if state not in self.state:
+                    raise ValueError('%s is not a valid state'% state)
                 self.zoo[zoo] = {
                     'City': city,
                     'State': state,
@@ -149,6 +151,24 @@ class _zoo_database:
                 
     def get_zoo(self, zoo):
         return self.zoo[zoo]
+    def put_zoo(self, zoo, info):
+        if info['State'] not in self.state:
+            raise ValueError('%s is not a valid state'% info['State'])
+        self.zoo[zoo] = info
+    def post_species(self, new_zoo):
+        if new_zoo['State'] not in self.state:
+            raise ValueError('%s is not a valid state'% new_zoo['State'])
+        self.zoo[new_zoo['Zoo']] = {
+            'City': new_zoo['City'],
+            'State': new_zoo['State'],
+            'Address': new_zoo['Address'],
+            'Number of Animals': new_zoo['Number of Animals'],
+            'Acres': new_zoo['Acres'],
+            'Opening Time': new_zoo['Opening Time'],
+            'Closing Time': new_zoo['Closing Time'],
+            'Annual Visitors': new_zoo['Annual Visitors'],
+            'Website URL': new_zoo['Website URL']
+        }           
 
     #Status Table
     def load_status(self):
