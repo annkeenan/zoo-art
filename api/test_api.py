@@ -169,7 +169,7 @@ class TestZooDatabase(unittest.TestCase):
         result = self.zdb.get_zoo('Hogwarts Zoo')
         self.assertEquals(result, exp_result)
 
-    def test_load_zoo(self):
+    def test_get_zoo(self):
         self.reset_database()
         exp_result = {
             'City': 'Abilene',
@@ -182,7 +182,6 @@ class TestZooDatabase(unittest.TestCase):
             'Annual Visitors': 175000,
             'Website URL': 'http://abilenezoo.org/'
         }
-        self.zdb.load_zoo()
         result = self.zdb.get_zoo('Audubon Zoo')
         self.assertEquals(result, exp_result)    
     # Status Tests
