@@ -38,6 +38,28 @@ class _zoo_database:
     def get_classication(self, family):
         return self.classification[family]
 
+    # Exhibit table 
+    def load_exhibit(self):
+        with open(BASEURL+EXHIBIT) as ef:
+            for line in ef:
+                zoo, species = line.rstrip().split(',')
+                if zoo not in self.exhibit:
+                    self.exhibit[zoo] = set([species])
+                else:
+                    self.exhibit[zoo].add(species)
+
+    def get_exhibit(self, exhibit):
+        try:
+            return self.exhibit[exhibit]
+        except Exception as ex:
+            return None
+
+    def post_exhibit(self, new_exhibit):
+        self.exhibit[new_exhibit['zoo name']] = new_exhibit['species']
+
+    def delete_exhibit(self, exhibit): 
+        del self.exhibit[exhibit]      
+      
     # Habitat table
     def load_habitat(self):
         with open(BASEURL+HABITAT) as hf:
@@ -68,7 +90,7 @@ class _zoo_database:
     def get_state(self, abbrev):
         return self.state[abbrev]
 
-    # Species Table
+    # Species table
     def load_species(self):
         with open(BASEURL+SPECIES) as spf:
             for line in spf:
@@ -98,32 +120,10 @@ class _zoo_database:
 
     def post_species(self, new_species):
         self.species[new_species['Species']] = {
-                    'Common Name': new_species['Common Name'],
-                    'Genus': new_species['Genus'],
-                    'Family': new_species['Family'],
-                    'Region': new_species['Region'],
-                    'Habitat': new_species['Habitat'],
-                    'Status': new_species['Status']
-                }
-
-    # Exhibit Table 
-    def load_exhibit(self):
-        with open(BASEURL+EXHIBIT) as ef:
-            for line in ef:
-                zoo, species = line.rstrip().split(',')
-                if zoo not in self.exhibit:
-                    self.exhibit[zoo] = set([species])
-                else:
-                    self.exhibit[zoo].add(species)
-
-    def get_exhibit(self, exhibit):
-        try:
-            return self.exhibit[exhibit]
-        except Exception as ex:
-            return None
-
-    def post_exhibit(self, new_exhibit):
-        self.exhibit[new_exhibit['zoo name']] = new_exhibit['species']
-
-    def delete_exhibit(self, exhibit): 
-        del self.exhibit[exhibit]
+            'Common Name': new_species['Common Name'],
+            'Genus': new_species['Genus'],
+            'Family': new_species['Family'],
+            'Region': new_species['Region'],
+            'Habitat': new_species['Habitat'],
+            'Status': new_species['Status']
+        }
