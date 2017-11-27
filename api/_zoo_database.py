@@ -43,11 +43,11 @@ class _zoo_database:
                 family, order, _class, phylum, kingdom, desc = line.rstrip().split(',', 6)
                 desc = set(desc.split(';'))
                 self.classification[family] = {
-                    'Order': order,
-                    'Class': _class,
-                    'Phylum': phylum,
-                    'Kingdom': kingdom,
-                    'Desc': desc
+                    'order': order,
+                    'class': _class,
+                    'phylum': phylum,
+                    'kingdom': kingdom,
+                    'desc': desc
                 }
 
     # Get a list of all families in alphabetical order
@@ -151,12 +151,12 @@ class _zoo_database:
                 habitats = set(habitat.split(';'))
 
                 self.species[species] = {
-                    'Common Name': common_names,
-                    'Genus': genus,
-                    'Family': family,
-                    'Region': regions,
-                    'Habitat': habitats,
-                    'Status': status
+                    'common name': common_names,
+                    'genus': genus,
+                    'family': family,
+                    'region': regions,
+                    'habitat': habitats,
+                    'status': status
                 }
 
     # Get a list of all species in alphabetical order
@@ -183,12 +183,12 @@ class _zoo_database:
     # Add a new species
     def post_species(self, new_species, info):
         # Foreign key constraints
-        if info['Family'] not in self.classification:
-            raise ValueError('"%s" is not an existing family name' % info['Family'])
-        for region in info['Region']:
+        if info['family'] not in self.classification:
+            raise ValueError('"%s" is not an existing family name' % info['family'])
+        for region in info['region']:
             if region not in self.region:
                 raise ValueError('"%s" is not an existing region' % region)
-        for habitat in info['Habitat']:
+        for habitat in info['habitat']:
             if habitat not in self.habitat:
                 raise ValueError('"%s" is not an existing habitat' % habitat)
         self.species[new_species] = info
@@ -218,8 +218,8 @@ class _zoo_database:
             for line in stsf:
                 level, status, description = line.rstrip().split(',')
                 self.status[status] = {
-                    'Level': int(level),
-                    'Description': description
+                    'level': int(level),
+                    'description': description
                 }
 
     # Get a list of the statuses in order
@@ -227,7 +227,7 @@ class _zoo_database:
         statuses = []
         for i in range(8):
             for status, info in self.status.items():
-                if info['Level'] == i:
+                if info['level'] == i:
                     statuses.append(status)
         return statuses
 
@@ -235,7 +235,7 @@ class _zoo_database:
     def get_status(self, status):
         if status not in self.status:
             raise ValueError('%s is not an existing status' % status)
-        return self.status[status]['Description']
+        return self.status[status]['description']
 
 ## Zoo table
     # Load from zoo.csv
@@ -244,15 +244,15 @@ class _zoo_database:
             for line in zf:
                 zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',', 10)
                 self.zoo[zoo] = {
-                    'City': city,
-                    'State': state,
-                    'Address': address,
-                    'Number of Animals': int(num_animals),
-                    'Acres': int(acres),
-                    'Opening Time': opening_time,
-                    'Closing Time': closing_time,
-                    'Annual Visitors': int(annual_visitors),
-                    'Website URL': website_url
+                    'city': city,
+                    'state': state,
+                    'address': address,
+                    'number of animals': int(num_animals),
+                    'acres': int(acres),
+                    'opening time': opening_time,
+                    'closing time': closing_time,
+                    'annual visitors': int(annual_visitors),
+                    'website url': website_url
                 }
 
     # Get a list of all zoos in alphabetical order
@@ -273,6 +273,6 @@ class _zoo_database:
 
     # Add a new zoo
     def post_zoo(self, new_zoo, info):
-        if info['State'] not in self.state:
-            raise ValueError('%s is not an existing state' % info['State'])
+        if info['state'] not in self.state:
+            raise ValueError('%s is not an existing state' % info['state'])
         self.zoo[new_zoo] = info

@@ -18,11 +18,11 @@ class TestZooDatabase(unittest.TestCase):
     def test_get_classification(self):
         self.reset_database()
         exp_result = {
-            'Order': 'perciformes',
-            'Class': 'actinopterygii',
-            'Phylum': 'chordata',
-            'Kingdom': 'animalia',
-            'Desc': {'surgeonfish', 'tang', 'unicornfish'}
+            'order': 'perciformes',
+            'class': 'actinopterygii',
+            'phylum': 'chordata',
+            'kingdom': 'animalia',
+            'desc': {'surgeonfish', 'tang', 'unicornfish'}
         }
         result = self.zdb.get_classication('acanthuridae')
         self.assertEqual(result, exp_result)
@@ -133,12 +133,12 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['neotropical'])
         habitats = set(['savanna/grassland', 'forest'])
         exp_result = {
-            'Common Name': common_names,
-            'Genus': 'ara',
-            'Family': 'psittacidae',
-            'Region': regions,
-            'Habitat': habitats,
-            'Status': 'CR'
+            'common name': common_names,
+            'genus': 'ara',
+            'family': 'psittacidae',
+            'region': regions,
+            'habitat': habitats,
+            'status': 'CR'
         }
         result = self.zdb.get_species('ara glaucogularis')
         self.assertEqual(result, exp_result)
@@ -150,12 +150,12 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['holarctic'])
         habitats = set(['tundra'])
         info = {
-            'Common Name': common_names,
-            'Genus': 'canis',
-            'Family': 'canidae',
-            'Region': regions,
-            'Habitat': habitats,
-            'Status': 'EX'
+            'common name': common_names,
+            'genus': 'canis',
+            'family': 'canidae',
+            'region': regions,
+            'habitat': habitats,
+            'status': 'EX'
         }
         self.zdb.post_species('canis dirus', info)
         # Update the species
@@ -171,12 +171,12 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['holarctic'])
         habitats = set(['tundra'])
         exp_result = {
-            'Common Name': common_names,
-            'Genus': 'canis',
-            'Family': 'canidae',
-            'Region': regions,
-            'Habitat': habitats,
-            'Status': 'EX'
+            'common name': common_names,
+            'genus': 'canis',
+            'family': 'canidae',
+            'region': regions,
+            'habitat': habitats,
+            'status': 'EX'
         }
         self.zdb.post_species('canis dirus', exp_result)
         result = self.zdb.get_species('canis dirus')
@@ -215,15 +215,15 @@ class TestZooDatabase(unittest.TestCase):
     def test_get_zoo(self):
         self.reset_database()
         exp_result = {
-            'City': 'Abilene',
-            'State': 'TX',
-            'Address': '2070 Zoo Lane',
-            'Number of Animals': 1100,
-            'Acres': 13,
-            'Opening Time': '9:00',
-            'Closing Time': '17:00',
-            'Annual Visitors': 175000,
-            'Website URL': 'http://abilenezoo.org/'
+            'city': 'Abilene',
+            'state': 'TX',
+            'address': '2070 Zoo Lane',
+            'number of animals': 1100,
+            'acres': 13,
+            'opening time': '9:00',
+            'closing time': '17:00',
+            'annual visitors': 175000,
+            'website url': 'http://abilenezoo.org/'
         }
         result = self.zdb.get_zoo('Abilene Zoo')
         self.assertEqual(result, exp_result)
@@ -231,32 +231,32 @@ class TestZooDatabase(unittest.TestCase):
     def test_put_zoo(self):
         self.reset_database()
         exp_result = {
-            'City': 'Abilene',
-            'State': 'TX',
-            'Address': '2070 Zoo Lane',
-            'Number of Animals': 1100,
-            'Acres': 13,
-            'Opening Time': '9:00',
-            'Closing Time': '17:00',
-            'Annual Visitors': 200000,
-            'Website URL': 'http://abilenezoo.org/'
+            'city': 'Abilene',
+            'state': 'TX',
+            'address': '2070 Zoo Lane',
+            'number of animals': 1100,
+            'acres': 13,
+            'opening time': '9:00',
+            'closing time': '17:00',
+            'annual visitors': 200000,
+            'website url': 'http://abilenezoo.org/'
         }
-        self.zdb.put_zoo('Abilene Zoo', 'Annual Visitors', 200000)
+        self.zdb.put_zoo('Abilene Zoo', 'annual visitors', 200000)
         result = self.zdb.get_zoo('Abilene Zoo')
         self.assertEqual(result, exp_result)
 
     def test_post_zoo(self):
         self.reset_database()
         exp_result = {
-            'City': 'Yorba Linda',
-            'State': 'CA',
-            'Address': '1234 Zoo Lane',
-            'Number of Animals': 777,
-            'Acres': 19,
-            'Opening Time': '9:00',
-            'Closing Time': '17:00',
-            'Annual Visitors': 45000,
-            'Website URL': 'http://zoo.org/'
+            'city': 'Yorba Linda',
+            'state': 'CA',
+            'address': '1234 Zoo Lane',
+            'number of animals': 777,
+            'acres': 19,
+            'opening time': '9:00',
+            'closing time': '17:00',
+            'annual visitors': 45000,
+            'website url': 'http://zoo.org/'
         }
         self.zdb.post_zoo('Test Zoo', exp_result)
         result = self.zdb.get_zoo('Test Zoo')
