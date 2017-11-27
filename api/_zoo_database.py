@@ -105,4 +105,36 @@ class _zoo_database:
 
     def get_exhibit(self, exhibit):
         return self.exhibit[exhibit]
-   
+    
+    #Zoo Table
+    def load_zoo(self):
+	with open(BASEURL+ZOO) as zf:
+            for line in zf:
+                zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',')
+                self.zoo[zoo] = {
+                    'City': city,
+                    'State': state,
+                    'Address': address,
+                    'Number of Animals': num_animals,
+                    'Acres': acres,
+                    'Opening Time': opening_time,
+                    'Closing Time': closing_time,
+                    'Annual Visitors': annual_visitors,
+                    'Website URL': website_url
+                }
+                
+    def get_zoo(self, zoo):
+        return self.zoo[zoo]
+
+    #Status Table
+    def load_status(self):
+        with open(BASEURL+STATUS) as stsf:
+            for line in stsf:
+                level, status, description = line.rstrip().split(',')
+                self.status[status] = {
+                    'Level': level,
+                    'Description': description
+                }
+           
+    def get_status(self, status):
+        return self.status[status]

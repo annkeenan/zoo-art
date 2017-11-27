@@ -62,6 +62,32 @@ class TestZooDatabase(unittest.TestCase):
         self.zdb.load_exhibit()
         result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
         self.assertEquals(result, exp_result)
+    def test_load_zoo(self):
+        self.reset_database()
+        exp_result = {
+            'City': 'Abilene',
+            'State': 'TX',
+            'Address': '2070 Zoo Lane',
+            'Number of Animals': 1100,
+            'Acres': 13,
+            'Opening Time': '9:00',
+            'Closing Time': '17:00',
+            'Annual Visitors': 175000,
+            'Website URL': 'http://abilenezoo.org/'
+        }
+        self.zdb.load_zoo()
+        result = self.zdb.get_zoo('Audubon Zoo')
+        self.assertEquals(result, exp_result)    
+           
+    def test_load_status(self):
+        self.reset_database()
+        exp_result = {
+            'Level': 0,
+            'Description': 'data deficient'
+        }
+        self.zdb.load_status()
+        result = self.zdb.get_status('DD')
+        self.assertEquals(result, exp_result)
 
 
 if __name__ == "__main__":
