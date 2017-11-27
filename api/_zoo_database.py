@@ -1,17 +1,9 @@
 # Constants
-BASEURL = '../db/'
-CLASSIFICATION = 'classification.csv'
-EXHIBIT = 'exhibit.csv'
-HABITAT = 'habitat.csv'
-REGION = 'region.csv'
-SPECIES = 'species.csv'
-STATE = 'state.csv'
-STATUS = 'status.csv'
-ZOO = 'zoo.csv'
 
 
 class _zoo_database:
     def __init__(self):
+        self.BASEURL = '../db/'
         self.classification = dict()
         self.exhibit = dict()
         self.habitat = dict()
@@ -46,7 +38,7 @@ class _zoo_database:
 ## Classification table
     # Load from classification.csv
     def load_classification(self):
-        with open(BASEURL+CLASSIFICATION) as cf:
+        with open(self.BASEURL+'classification.csv') as cf:
             for line in cf:
                 family, order, _class, phylum, kingdom, desc = line.rstrip().split(',', 6)
                 desc = set(desc.split(';'))
@@ -58,6 +50,10 @@ class _zoo_database:
                     'Desc': desc
                 }
 
+    # Get a list of all families in alphabetical order
+    def get_families(self):
+        return sorted(self.classification.keys())
+
     # Get the full classification of a family
     def get_classication(self, family):
         if family not in self.classification:
@@ -67,17 +63,17 @@ class _zoo_database:
 ## Exhibit table
     # Load from exhibit.csv
     def load_exhibit(self):
-        with open(BASEURL+EXHIBIT) as ef:
+        with open(self.BASEURL+'exhibit.csv') as ef:
             for line in ef:
                 zoo, species = line.rstrip().split(',', 2)
                 if zoo not in self.exhibit:
                     self.exhibit[zoo] = set()
                 self.exhibit[zoo].add(species)
 
-    # Get all animals exhibited at a zoo
-    def get_exhibit(self, zoo):
+    # Get all animals exhibited at a zoo in alphabetical order
+    def get_exhibits(self, zoo):
         if zoo in self.exhibit:
-            return self.exhibit[zoo]
+            return sorted(self.exhibit[zoo])
         else:
             return None
 
@@ -103,10 +99,14 @@ class _zoo_database:
 ## Habitat table
     # Load from habitat.csv
     def load_habitat(self):
-        with open(BASEURL+HABITAT) as hf:
+        with open(self.BASEURL+'habitat.csv') as hf:
             for line in hf:
                 habitat, desc = line.rstrip().split(',', 2)
                 self.habitat[habitat] = desc
+
+    # Get a list of all habitats in alphabetical order
+    def get_habitats(self):
+        return sorted(self.habitat.keys())
 
     # Return the habitat description
     def get_habitat(self, habitat):
@@ -121,10 +121,14 @@ class _zoo_database:
 ## Region table
     # Load from region.csv
     def load_region(self):
-        with open(BASEURL+REGION) as rf:
+        with open(self.BASEURL+'region.csv') as rf:
             for line in rf:
                 region, desc = line.rstrip().split(',', 2)
                 self.region[region] = desc
+
+    # Get a list of all regions in alphabetical order
+    def get_regions(self):
+        return sorted(self.region.keys())
 
     # Return the region description
     def get_region(self, region):
@@ -139,20 +143,25 @@ class _zoo_database:
 ## Species table
     # Load from species.csv
     def load_species(self):
-        with open(BASEURL+SPECIES) as spf:
+        with open(self.BASEURL+'species.csv') as spf:
             for line in spf:
                 species, common_name, genus, family, region, habitat, status = line.rstrip().split(',', 7)
                 common_names = set(common_name.split(';'))
+                regions = set(region.split(';'))
                 habitats = set(habitat.split(';'))
 
                 self.species[species] = {
                     'Common Name': common_names,
                     'Genus': genus,
                     'Family': family,
-                    'Region': region,
+                    'Region': regions,
                     'Habitat': habitats,
                     'Status': status
                 }
+
+    # Get a list of all species in alphabetical order
+    def get_all_species(self):
+        return sorted(self.species.keys())
 
     # Get the species information from the species name
     def get_species(self, species):
@@ -187,10 +196,14 @@ class _zoo_database:
 ## State table
     # Load from state.csv
     def load_state(self):
-        with open(BASEURL+STATE) as sf:
+        with open(self.BASEURL+'state.csv') as sf:
             for line in sf:
                 abbrev, state = line.rstrip().split(',', 2)
                 self.state[abbrev] = state
+
+    # Get a list of all states in alphabetical order
+    def get_states(self):
+        return sorted(self.state.keys())
 
     # Get the full state name
     def get_state(self, abbrev):
@@ -201,7 +214,7 @@ class _zoo_database:
 ## Status table
     # Load from status.csv
     def load_status(self):
-        with open(BASEURL+STATUS) as stsf:
+        with open(self.BASEURL+'status.csv') as stsf:
             for line in stsf:
                 level, status, description = line.rstrip().split(',')
                 self.status[status] = {
@@ -227,7 +240,7 @@ class _zoo_database:
 ## Zoo table
     # Load from zoo.csv
     def load_zoo(self):
-        with open(BASEURL+ZOO) as zf:
+        with open(self.BASEURL+'zoo.csv') as zf:
             for line in zf:
                 zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',', 10)
                 self.zoo[zoo] = {
@@ -242,6 +255,11 @@ class _zoo_database:
                     'Website URL': website_url
                 }
 
+    # Get a list of all zoos in alphabetical order
+    def get_zoos(self):
+        return sorted(self.zoo.keys())
+
+    # Get information about a zoo
     def get_zoo(self, zoo):
         if zoo not in self.zoo:
             raise ValueError('%s is not an existing zoo' % zoo)

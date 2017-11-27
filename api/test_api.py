@@ -10,6 +10,11 @@ class TestZooDatabase(unittest.TestCase):
         self.zdb.load_all()
 
 ## Classification table tests
+    def test_get_families(self):
+        self.reset_database()
+        result = self.zdb.get_families()
+        self.assertIsInstance(result, list)
+
     def test_get_classification(self):
         self.reset_database()
         exp_result = {
@@ -23,9 +28,9 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Exhibit table tests
-    def test_get_exhibit(self):
+    def test_get_exhibits(self):
         self.reset_database()
-        exp_result = set([
+        exp_result = [
             'aegolius acadicus',
             'buteo jamaicensis',
             'buteo lagopus',
@@ -36,13 +41,15 @@ class TestZooDatabase(unittest.TestCase):
             'falco sparverius',
             'haliaeetus leucocephalus',
             'ursus arctos horribilis'
-        ])
-        result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
+        ]
+        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
     def test_post_exhibit(self):
         self.reset_database()
-        exp_result = set([
+        exp_result = [
+            'acanthurus olivaceus',
+            'acanthurus pyroferus',
             'aegolius acadicus',
             'buteo jamaicensis',
             'buteo lagopus',
@@ -53,17 +60,15 @@ class TestZooDatabase(unittest.TestCase):
             'falco sparverius',
             'haliaeetus leucocephalus',
             'ursus arctos horribilis',
-            'acanthurus olivaceus',
-            'acanthurus pyroferus'
-        ])
-        add_species = set(['acanthurus olivaceus', 'acanthurus pyroferus'])
+        ]
+        add_species = ['acanthurus olivaceus', 'acanthurus pyroferus']
         self.zdb.post_exhibit('Grizzly and Wolf Discovery Center', add_species)
-        result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
     def test_delete_exhibit(self):
         self.reset_database()
-        exp_result = set([
+        exp_result = [
             'aegolius acadicus',
             'buteo jamaicensis',
             'buteo lagopus',
@@ -73,12 +78,17 @@ class TestZooDatabase(unittest.TestCase):
             'falco peregrinus',
             'falco sparverius',
             'haliaeetus leucocephalus'
-        ])
+        ]
         self.zdb.delete_exhibit('Grizzly and Wolf Discovery Center', 'ursus arctos horribilis')
-        result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
 ## Habitat table tests
+    def test_get_habitats(self):
+        self.reset_database()
+        result = self.zdb.get_habitats()
+        self.assertIsInstance(result, list)
+
     def test_get_habitat(self):
         self.reset_database()
         exp_result = 'near the seabed at the bottom of a body of water'
@@ -93,6 +103,11 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Region table tests
+    def test_get_regions(self):
+        self.reset_database()
+        result = self.zdb.get_regions()
+        self.assertIsInstance(result, list)
+
     def test_get_region(self):
         self.reset_database()
         exp_result = 'north america'
@@ -107,14 +122,22 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Species table tests
+    def test_get_all_species(self):
+        self.reset_database()
+        result = self.zdb.get_all_species()
+        self.assertIsInstance(result, list)
+
     def test_get_species(self):
         self.reset_database()
+        common_names = set(['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'])
+        regions = set(['neotropical'])
+        habitats = set(['savanna/grassland', 'forest'])
         exp_result = {
-            'Common Name': set(['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw']),
+            'Common Name': common_names,
             'Genus': 'ara',
             'Family': 'psittacidae',
-            'Region': 'neotropical',
-            'Habitat': set(['savanna/grassland', 'forest']),
+            'Region': regions,
+            'Habitat': habitats,
             'Status': 'CR'
         }
         result = self.zdb.get_species('ara glaucogularis')
@@ -160,6 +183,11 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## State table tests
+    def test_get_states(self):
+        self.reset_database()
+        result = self.zdb.get_states()
+        self.assertIsInstance(result, list)
+
     def test_get_state(self):
         self.reset_database()
         exp_result = 'North Carolina'
@@ -167,6 +195,11 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Status table tests
+    def test_get_statuses(self):
+        self.reset_database()
+        result = self.zdb.get_statuses()
+        self.assertIsInstance(result, list)
+
     def test_get_status(self):
         self.reset_database()
         exp_result = 'data deficient'
@@ -174,6 +207,11 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Zoo table tests
+    def test_get_zoos(self):
+        self.reset_database()
+        result = self.zdb.get_zoos()
+        self.assertIsInstance(result, list)
+
     def test_get_zoo(self):
         self.reset_database()
         exp_result = {
