@@ -1,7 +1,16 @@
-from constants import *
+# Constants
+BASEURL = '../db/'
+CLASSIFICATION = 'classification.csv'
+EXHIBIT = 'exhibit.csv'
+HABITAT = 'habitat.csv'
+REGION = 'region.csv'
+SPECIES = 'species.csv'
+STATE = 'state.csv'
+STATUS = 'status.csv'
+ZOO = 'zoo.csv'
+
 
 class _zoo_database:
-## General functions
     def __init__(self):
         self.classification = dict()
         self.exhibit = dict()
@@ -74,10 +83,9 @@ class _zoo_database:
 
     # Add animal(s) to a zoo exhibit as a set
     def post_exhibit(self, zoo, species):
-        # Only add to exhibit if zoo and species both exist
+        # Only add to exhibit if zoo and all species exist
         if zoo not in self.zoo:
             raise ValueError('"%s" is not an existing zoo' % zoo)
-        
         for _species in species:
             if _species not in self.species:
                 raise ValueError('"%s" is not an existing species' % _species)
@@ -187,7 +195,7 @@ class _zoo_database:
     # Get the full state name
     def get_state(self, abbrev):
         if abbrev not in self.state:
-            raise ValueError('%s is not an existing state' % state)
+            raise ValueError('%s is not an existing state abbreviation' % abbrev)
         return self.state[abbrev]
 
 ## Status table
@@ -200,6 +208,7 @@ class _zoo_database:
                     'Level': int(level),
                     'Description': description
                 }
+
     # Get a list of the statuses in order
     def get_statuses(self):
         statuses = []
@@ -247,5 +256,5 @@ class _zoo_database:
     # Add a new zoo
     def post_zoo(self, new_zoo, info):
         if info['State'] not in self.state:
-            raise ValueError('%s is not an existing state'% info['State'])
+            raise ValueError('%s is not an existing state' % info['State'])
         self.zoo[new_zoo] = info

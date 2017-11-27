@@ -1,6 +1,7 @@
 from _zoo_database import _zoo_database
 import unittest
 
+
 class TestZooDatabase(unittest.TestCase):
     zdb = _zoo_database()
 
@@ -38,7 +39,7 @@ class TestZooDatabase(unittest.TestCase):
         ])
         result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
-        
+
     def test_post_exhibit(self):
         self.reset_database()
         exp_result = set([
@@ -56,7 +57,7 @@ class TestZooDatabase(unittest.TestCase):
             'acanthurus pyroferus'
         ])
         add_species = set(['acanthurus olivaceus', 'acanthurus pyroferus'])
-        self.zdb.post_exhibit('Grizzly and Wolf Discovery Center', exp_result)
+        self.zdb.post_exhibit('Grizzly and Wolf Discovery Center', add_species)
         result = self.zdb.get_exhibit('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
@@ -187,7 +188,7 @@ class TestZooDatabase(unittest.TestCase):
             'Website URL': 'http://abilenezoo.org/'
         }
         result = self.zdb.get_zoo('Abilene Zoo')
-        self.assertEqual(result, exp_result) 
+        self.assertEqual(result, exp_result)
 
     def test_put_zoo(self):
         self.reset_database()
@@ -201,7 +202,7 @@ class TestZooDatabase(unittest.TestCase):
             'Closing Time': '17:00',
             'Annual Visitors': 200000,
             'Website URL': 'http://abilenezoo.org/'
-        }        
+        }
         self.zdb.put_zoo('Abilene Zoo', 'Annual Visitors', 200000)
         result = self.zdb.get_zoo('Abilene Zoo')
         self.assertEqual(result, exp_result)
@@ -221,7 +222,8 @@ class TestZooDatabase(unittest.TestCase):
         }
         self.zdb.post_zoo('Test Zoo', exp_result)
         result = self.zdb.get_zoo('Test Zoo')
-        self.assertEqual(result, exp_result)  
+        self.assertEqual(result, exp_result)
+
 
 if __name__ == "__main__":
     unittest.main()
