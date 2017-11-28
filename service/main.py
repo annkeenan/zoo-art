@@ -86,7 +86,7 @@ def start_service():
 ## Configuration
     conf = {
         'global': {
-            'server.socket_host': '0.0.0.0',
+            'server.socket_host': 'student04.cse.nd.edu',
             'server.socket_port': 51042,
         },
         '/': {

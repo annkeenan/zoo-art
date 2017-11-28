@@ -52,6 +52,7 @@ class _zoo_database:
         return self.classification[family]
 
     def post_classification(self, family, info):
+        info['desc'] = set(info['desc'])
         self.classification[family] = info
 
 ## Exhibit table
