@@ -5,7 +5,7 @@ import unittest
 
 class TestHabitat(unittest.TestCase):
     PORT_NUM = '51042'
-    print("Testing port number: ", PORT_NUM)
+    print("Testing /habitat/")
     SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
     HABITAT_URL = SITE_URL + '/habitat/'
     RESET_URL = SITE_URL + '/reset/'

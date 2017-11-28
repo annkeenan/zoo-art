@@ -5,7 +5,7 @@ import unittest
 
 class TestRegion(unittest.TestCase):
     PORT_NUM = '51042'
-    print("Testing port number: ", PORT_NUM)
+    print("Testing /region/")
     SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
     REGION_URL = SITE_URL + '/region/'
     RESET_URL = SITE_URL + '/reset/'
