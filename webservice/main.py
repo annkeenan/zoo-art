@@ -1,7 +1,7 @@
 import cherrypy
 import context  # Add the parent directory to the path
 
-from api import _zoo_database
+from ooapi import _zoo_database
 from classification import _classification_controller
 # from exhibit import _exhibit_controller
 from habitat import _habitat_controller
