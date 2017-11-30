@@ -4,7 +4,7 @@ import unittest
 
 
 class TestZoo(unittest.TestCase):
-	PORT_NUM = '51068'
+	PORT_NUM = '51042'
 	print("Testing /zoo/")
 	SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
 	ZOO_URL = SITE_URL + '/zoo/'

@@ -4,7 +4,7 @@ import unittest
 
 
 class TestExhibit(unittest.TestCase):
-	PORT_NUM = '51056'
+	PORT_NUM = '51042'
 	print("Testing /species/")
 	SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
 	SPECIES_URL = SITE_URL + '/species/'
@@ -33,7 +33,7 @@ class TestExhibit(unittest.TestCase):
 		self.assertIsInstance(species, list)
 
 	def test_get_species(self):
-		self.reset_data()	
+		self.reset_data()
 		r = requests.get(self.SPECIES_URL + 'ara glaucogularis')
 		self.assertTrue(self.is_json(r.content.decode()))
 		resp = json.loads(r.content.decode())
@@ -54,7 +54,7 @@ class TestExhibit(unittest.TestCase):
 		self.assertTrue(self.is_json(r.content.decode()))
 		resp = json.loads(r.content.decode())
 		self.assertEqual(resp['result'], 'success')
-		
+
 		r = requests.get(self.SPECIES_URL + 'ara glaucogularis')
 		self.assertTrue(self.is_json(r.content.decode()))
 		resp = json.loads(r.content.decode())
@@ -92,7 +92,7 @@ class TestExhibit(unittest.TestCase):
             'habitat': ['tundra'],
             'status': 'EX'})
 
-		
+
 
 if __name__ == "__main__":
     unittest.main()
