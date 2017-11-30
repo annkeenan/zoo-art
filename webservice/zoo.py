@@ -35,7 +35,7 @@ class _zoo_controller(object):
             output = {'result': 'error', 'message': str(e)}
         # Return status
         return json.dumps(output)
-    def put_zoo(self, zoo, column, info):
+    def put_zoo(self, zoo):
         #NOT DONE YET
         output = {'result': 'success'}
         #Get the put data
@@ -44,7 +44,9 @@ class _zoo_controller(object):
         data = json.loads(rawbody)
         # Call the database function
         try:
-            self.db.put_zoo(data['zoo'], data['info'])
+            #loop through columns and update data
+            for column in data:
+                self.db.put_zoo(zoo, column, data[column])
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         # Return status
