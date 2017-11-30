@@ -35,6 +35,7 @@ class _species_controller(object):
 		rawbody = cherrypy.request.body.read()
 		data = json.loads(rawbody)
 		try:
+			# loop through columns to update each for species
 			for column in data:
 				self.db.put_species(species, column, data[column])
 		except Exception as e:
