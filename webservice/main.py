@@ -108,7 +108,7 @@ def start_service():
     dispatcher.connect(name='get_statuses', route='/status/', controller=status_controller, action='get_statuses', conditions=dict(method=['GET']))
     dispatcher.connect(name='get_status', route='/status/:status', controller=status_controller, action='get_status', conditions=dict(method=['GET']))
     # Zoo
-    dispatcher.connect(name='get_all_zoos', route='/zoo/', controller=zoo_controller, action='get_zoos', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_zoos', route='/zoo/', controller=zoo_controller, action='get_zoos', conditions=dict(method=['GET']))
     dispatcher.connect(name='get_zoo', route='/zoo/:zoo', controller=zoo_controller, action='get_zoo', conditions=dict(method=['GET']))
     dispatcher.connect(name='put_zoo', route='/zoo/:zoo', controller=zoo_controller, action='put_zoo', conditions=dict(method=['PUT']))
     dispatcher.connect(name='post_zoo', route='/zoo/', controller=zoo_controller, action='post_zoo', conditions=dict(method=['POST']))
