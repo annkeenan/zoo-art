@@ -67,15 +67,12 @@ class TestExhibit(unittest.TestCase):
             'ursus arctos horribilis',
         ])
 
-	"""def test_delete_exhibit(self):
+	def test_delete_exhibit(self):
 		self.reset_data()
-		reqBody = {}
-		reqBody['species'] = 'ursus arctos horribilis'
-		r = requests.delete(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center', data=json.dumps(reqBody))
+		r = requests.delete(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center' + '/haliaeetus leucocephalus')
 		self.assertTrue(self.is_json(r.content.decode()))
 		resp = json.loads(r.content.decode())
 		self.assertEqual(resp['result'], 'success')
-
 		r = requests.get(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center')
 		resp = json.loads(r.content.decode())
 		self.assertEqual(resp['species'], ['aegolius acadicus',
@@ -86,7 +83,7 @@ class TestExhibit(unittest.TestCase):
             'cathartes aura',
             'falco peregrinus',
             'falco sparverius',
-            'haliaeetus leucocephalus'])"""
+			'ursus arctos horribilis'])
 
 if __name__ == "__main__":
     unittest.main()
