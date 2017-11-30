@@ -23,7 +23,7 @@ class TestZoo(unittest.TestCase):
 		except ValueError:
 			return False
 
-	def test_get_all_zoo(self):
+	def test_get_zoos(self):
 		self.reset_data()
 		r = requests.get(self.ZOO_URL)
 		self.assertTrue(self.is_json(r.content.decode()))

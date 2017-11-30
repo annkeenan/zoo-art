@@ -9,8 +9,8 @@ from region import _region_controller
 from reset import _reset_controller
 from species import _species_controller
 from state import _state_controller
-# from status import _status_controller
-# from zoo import _zoo_controller
+from status import _status_controller
+from zoo import _zoo_controller
 
 
 class _options_controller(object):
@@ -36,8 +36,8 @@ def start_service():
     reset_controller = _reset_controller(zdb)
     species_controller = _species_controller(zdb)
     state_controller = _state_controller(zdb)
-    # status_controller = _status_controller(zdb)
-    # zoo_controller = _zoo_controller(zdb)
+    status_controller = _status_controller(zdb)
+    zoo_controller = _zoo_controller(zdb)
 
     dispatcher = cherrypy.dispatch.RoutesDispatcher()
 
@@ -69,7 +69,13 @@ def start_service():
     dispatcher.connect(name='preflight_get_states', route='/state/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect(name='preflight_get_state', route='/state/:abbrev', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Status
+    dispatcher.connect(name='preflight_get_statuses', route='/status/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_status', route='/status/:status', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Zoo
+    dispatcher.connect(name='preflight_get_zoos', route='/zoos/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_zoo', route='/zoo/:zoo', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_put_zoo', route='/zoo/:zoo', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_post_zoo', route='/zoo/', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
 
 ## Options
     # Classification
@@ -99,7 +105,13 @@ def start_service():
     dispatcher.connect(name='get_states', route='/state/', controller=state_controller, action='get_states', conditions=dict(method=['GET']))
     dispatcher.connect(name='get_state', route='/state/:abbrev', controller=state_controller, action='get_state', conditions=dict(method=['GET']))
     # Status
+    dispatcher.connect(name='get_statuses', route='/status/', controller=status_controller, action='get_statuses', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_status', route='/status/:status', controller=status_controller, action='get_status', conditions=dict(method=['GET']))
     # Zoo
+    dispatcher.connect(name='get_all_zoos', route='/zoo/', controller=zoo_controller, action='get_zoos', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_zoo', route='/zoo/:zoo', controller=zoo_controller, action='get_zoo', conditions=dict(method=['GET']))
+    dispatcher.connect(name='put_zoo', route='/zoo/:zoo', controller=zoo_controller, action='put_zoo', conditions=dict(method=['PUT']))
+    dispatcher.connect(name='post_zoo', route='/zoo/', controller=zoo_controller, action='post_zoo', conditions=dict(method=['POST']))
 
 ## Configuration
     conf = {
