@@ -4,7 +4,7 @@ import unittest
 
 
 class TestExhibit(unittest.TestCase):
-	PORT_NUM = '51056'
+	PORT_NUM = '51042'
 	print("Testing /exibit/")
 	SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
 	EXHIBIT_URL = SITE_URL + '/exhibit/'
@@ -49,7 +49,7 @@ class TestExhibit(unittest.TestCase):
 		self.assertTrue(self.is_json(r.content.decode()))
 		resp = json.loads(r.content.decode())
 		self.assertEqual(resp['result'], 'success')
-		
+
 		r = requests.get(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center')
 		resp = json.loads(r.content.decode())
 		self.assertEqual(resp['species'], [

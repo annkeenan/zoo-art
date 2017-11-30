@@ -4,7 +4,7 @@ import unittest
 
 
 class TestExhibit(unittest.TestCase):
-	PORT_NUM = '51056'
+	PORT_NUM = '51042'
 	print("Testing /state/")
 	SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
 	STATE_URL = SITE_URL + '/state/'
