@@ -27,15 +27,10 @@ class _exhibit_controller(object):
 			output = {'result': 'error', 'message': str(e)}
 		return json.dumps(output)
 
-	"""def delete_exhibit(self, zoo):
+	def delete_exhibit(self, zoo, species):
 		output = {'result': 'success'}
-		cl = cherrypy.request.headers['Content-Length']
-		rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
-		print (rawbody)
-		data = json.loads(rawbody)
 		try:
-			print ('??????')
-			self.db.delete_exhibit(zoo, data['species'])	
+			self.db.delete_exhibit(zoo, species)	
 		except Exception as e:
 			output = {'result': 'error', 'message': str(e)}
-		return json.dumps(output)"""
+		return json.dumps(output)

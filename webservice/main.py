@@ -79,7 +79,7 @@ def start_service():
     # Exhibit
     dispatcher.connect(name='get_exhibits', route='/exhibit/:zoo', controller=exhibit_controller, action='get_exhibits', conditions=dict(method=['GET']))
     dispatcher.connect(name='post_exhibits', route='/exhibit/:zoo', controller=exhibit_controller, action='post_exhibit', conditions=dict(method=['POST']))
-    dispatcher.connect(name='delete_exhibit', route='/exhibit/:zoo', controller=exhibit_controller, action='delete_exhibit', conditions=dict(method=['DELETE']))
+    dispatcher.connect(name='delete_exhibit', route='/exhibit/:zoo/:species', controller=exhibit_controller, action='delete_exhibit', conditions=dict(method=['DELETE']))
     # Habitat
     dispatcher.connect(name='get_habitats', route='/habitat/', controller=habitat_controller, action='get_habitats', conditions=dict(method=['GET']))
     dispatcher.connect(name='get_habitat', route='/habitat/:habitat', controller=habitat_controller, action='get_habitat', conditions=dict(method=['GET']))
