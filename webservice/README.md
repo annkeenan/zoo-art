@@ -11,3 +11,9 @@ queried through a GET request that fetches a list of all stored elements in the
 specified table at the url /classification/, /habitat/, /region/, /state/, or
 /status/. Users may also add to these tables with a post request, or get an
 individual entry in the table by querying on a specific entry id.
+
+The exhibit table holds the zoo names and the species in those exhibits.
+When posting an exhbit the user can add a species to a zoo. A get request to 
+an exhibit returns a list of all the species in that exhibit, and a delte 
+removes a species from an exhibit.
+
