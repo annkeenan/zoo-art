@@ -1,6 +1,7 @@
 import cherrypy
 import json
 
+
 class _zoo_controller(object):
     def __init__(self, db):
         self.db = db
@@ -14,6 +15,7 @@ class _zoo_controller(object):
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
+
     def get_zoo(self, zoo):
         output = {'result': 'success'}
         try:
@@ -22,9 +24,10 @@ class _zoo_controller(object):
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
+
     def post_zoo(self):
         output = {'result': 'success'}
-        #Get the post data
+        # Get the post data
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
         data = json.loads(rawbody)
@@ -35,16 +38,17 @@ class _zoo_controller(object):
             output = {'result': 'error', 'message': str(e)}
         # Return status
         return json.dumps(output)
+
     def put_zoo(self, zoo):
-        #NOT DONE YET
+        # NOT DONE YET
         output = {'result': 'success'}
-        #Get the put data
+        # Get the put data
         cl = cherrypy.request.headers['Content-Length']
         rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
         data = json.loads(rawbody)
         # Call the database function
         try:
-            #loop through columns and update data
+            # loop through columns and update data
             for column in data:
                 self.db.put_zoo(zoo, column, data[column])
         except Exception as e:

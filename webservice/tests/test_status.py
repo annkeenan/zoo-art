@@ -43,5 +43,6 @@ class TestRegion(unittest.TestCase):
         self.assertEqual(resp['result'], 'success')
         self.assertEqual(resp['description'], 'data deficient')
 
+
 if __name__ == "__main__":
     unittest.main()

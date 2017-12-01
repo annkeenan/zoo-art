@@ -1,6 +1,7 @@
 import cherrypy
 import json
 
+
 class _status_controller(object):
     def __init__(self, db):
         self.db = db
@@ -14,6 +15,7 @@ class _status_controller(object):
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
+
     def get_status(self, status):
         output = {'result': 'success'}
         try:
