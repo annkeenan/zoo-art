@@ -29,7 +29,7 @@ class _zoo_controller(object):
         output = {'result': 'success'}
         # Get the post data
         cl = cherrypy.request.headers['Content-Length']
-        rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
+        rawbody = cherrypy.request.body.read()
         data = json.loads(rawbody)
         # Call the database function
         try:
@@ -40,11 +40,10 @@ class _zoo_controller(object):
         return json.dumps(output)
 
     def put_zoo(self, zoo):
-        # NOT DONE YET
         output = {'result': 'success'}
         # Get the put data
         cl = cherrypy.request.headers['Content-Length']
-        rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
+        rawbody = cherrypy.request.body.read()
         data = json.loads(rawbody)
         # Call the database function
         try:

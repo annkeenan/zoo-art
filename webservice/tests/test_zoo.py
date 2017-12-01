@@ -29,7 +29,7 @@ class TestZoo(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        zoo = resp['zoo']
+        zoo = resp['zoos']
         self.assertIsInstance(zoo, list)
 
     def test_get_zoo(self):
@@ -38,7 +38,7 @@ class TestZoo(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['Abilene Zoo'], {
+        self.assertEqual(resp['zoo'], {
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
@@ -47,7 +47,7 @@ class TestZoo(unittest.TestCase):
             'opening time': '9:00',
             'closing time': '17:00',
             'annual visitors': 175000,
-            'website URL': 'http://abilenezoo.org/'
+            'website url': 'http://abilenezoo.org/'
         })
 
     def test_put_zoo(self):
@@ -64,7 +64,7 @@ class TestZoo(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['Abilene Zoo'], {
+        self.assertEqual(resp['zoo'], {
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
@@ -73,23 +73,21 @@ class TestZoo(unittest.TestCase):
             'opening time': '9:00',
             'closing time': '17:00',
             'annual visitors': 15000,
-            'website URL': 'http://abilenezoo.org/'
+            'website url': 'http://abilenezoo.org/'
         })
 
     def test_post_zoo(self):
         self.reset_data()
-        reqBody = {
-            'zoo': 'Fake Zoo',
-            'info': {
-                'city': 'Anaheim',
-                'state': 'Ca',
-                'address': '1234 Zoo Lane',
-                'number of animals': 1700,
-                'acres': 38,
-                'opening time': '8:00',
-                'closing time': '17:00',
-                'annual visitors': 185000,
-                'website URL': 'http://fakezoo.org/'
+        reqBody = {'zoo': 'Fake Zoo','info': {
+            'city': 'Anaheim',
+            'state': 'CA',
+            'address': '1234 Zoo Lane',
+            'number of animals': 1700,
+            'acres': 38,
+            'opening time': '8:00',
+            'closing time': '17:00',
+            'annual visitors': 185000,
+            'website url': 'http://fakezoo.org/'
             }
         }
 
@@ -101,16 +99,16 @@ class TestZoo(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['Fake Zoo'], {
+        self.assertEqual(resp['zoo'], {
             'city': 'Anaheim',
-            'state': 'Ca',
+            'state': 'CA',
             'address': '1234 Zoo Lane',
             'number of animals': 1700,
             'acres': 38,
             'opening time': '8:00',
             'closing time': '17:00',
             'annual visitors': 185000,
-            'website URL': 'http://fakezoo.org/'
+            'website url': 'http://fakezoo.org/'
         })
 
 

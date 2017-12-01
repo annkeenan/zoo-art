@@ -3,7 +3,7 @@ import requests
 import unittest
 
 
-class TestRegion(unittest.TestCase):
+class TestStatus(unittest.TestCase):
     PORT_NUM = '51042'
     print("Testing /status/")
     SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
