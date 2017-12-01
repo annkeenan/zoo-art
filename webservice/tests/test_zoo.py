@@ -78,7 +78,7 @@ class TestZoo(unittest.TestCase):
 
     def test_post_zoo(self):
         self.reset_data()
-        reqBody = {'zoo': 'Fake Zoo','info': {
+        reqBody = {'zoo': 'Fake Zoo', 'info': {
             'city': 'Anaheim',
             'state': 'CA',
             'address': '1234 Zoo Lane',
@@ -88,8 +88,7 @@ class TestZoo(unittest.TestCase):
             'closing time': '17:00',
             'annual visitors': 185000,
             'website url': 'http://fakezoo.org/'
-            }
-        }
+        }}
 
         r = requests.post(self.ZOO_URL, data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
