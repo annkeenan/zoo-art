@@ -17,3 +17,8 @@ When posting an exhbit the user can add a species to a zoo. A get request to
 an exhibit returns a list of all the species in that exhibit, and a delte 
 removes a species from an exhibit.
 
+The species table holds the species and its Common Names, Genus, Family, Region,
+Habitat, and Status. Using a get requests a user can get all of the species or
+you can get a single species. You can modify a species' specifications with a put request.
+If a new species is discorved then you can post a new species.
+
