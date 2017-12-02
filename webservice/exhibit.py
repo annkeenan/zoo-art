@@ -7,11 +7,27 @@ class _exhibit_controller(object):
         self.db = db
         self.BASE_PATH = '/home/paradigms/'
 
-    def get_exhibits(self, zoo):
+    def get_exhibits(self, zoo, boolean):
+        output = {'result': 'success'}
+        
+        try:
+            if boolean == 'true':
+                result = self.db.get_exhibited_zoo(zoo)
+            elif boolean == 'false': 
+                result = self.db.get_not_exhibited_zoo(zoo)
+            output['species'] = result
+        except Exception as e:
+            output = {'result': 'error', 'message': str(e)}
+
+        if boolean != 'true' and boolean != 'false':
+            output = {'result': 'error', 'message': 'second parameter is not true or false'}
+        return json.dumps(output)
+
+    def get_exhibits_species(self, species):
         output = {'result': 'success'}
         try:
-            result = self.db.get_exhibits(zoo)
-            output['species'] = result
+            result = self.db.get_exhibits_species(species)
+            output['zoos'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)

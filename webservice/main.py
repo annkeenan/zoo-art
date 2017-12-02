@@ -47,7 +47,8 @@ def start_service():
     dispatcher.connect(name='preflight_get_classification', route='/classification/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect(name='preflight_post_classification', route='/classification/:family', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Exhibit
-    dispatcher.connect(name='preflight_get_exhibits', route='/exhibit/:zoo', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_exhibits', route='/exhibit/:zoo/:boolean', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
+    dispatcher.connect(name='preflight_get_exhibit_species', route='/exhibit/:species', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect(name='preflight_post_exhibit', route='/exhibit/:zoo', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     dispatcher.connect(name='preflight_delete_exhibit', route='/exhibit/:zoo', controller=options_controller, action='OPTIONS', conditions=dict(method=['OPTIONS']))
     # Habitat
@@ -83,7 +84,8 @@ def start_service():
     dispatcher.connect(name='get_classification', route='/classification/:family', controller=classification_controller, action='get_classification', conditions=dict(method=['GET']))
     dispatcher.connect(name='post_classification', route='/classification/', controller=classification_controller, action='post_classification', conditions=dict(method=['POST']))
     # Exhibit
-    dispatcher.connect(name='get_exhibits', route='/exhibit/:zoo', controller=exhibit_controller, action='get_exhibits', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_exhibits', route='/exhibit/:zoo/:boolean', controller=exhibit_controller, action='get_exhibits', conditions=dict(method=['GET']))
+    dispatcher.connect(name='get_exhibits_species', route='/exhibit/:species', controller=exhibit_controller, action='get_exhibits_species', conditions=dict(method=['GET']))
     dispatcher.connect(name='post_exhibits', route='/exhibit/:zoo', controller=exhibit_controller, action='post_exhibit', conditions=dict(method=['POST']))
     dispatcher.connect(name='delete_exhibit', route='/exhibit/:zoo/:species', controller=exhibit_controller, action='delete_exhibit', conditions=dict(method=['DELETE']))
     # Habitat
@@ -117,7 +119,7 @@ def start_service():
     conf = {
         'global': {
             'server.socket_host': 'student04.cse.nd.edu',
-            'server.socket_port': 51042,
+            'server.socket_port': 51056,
         },
         '/': {
             'request.dispatch': dispatcher,

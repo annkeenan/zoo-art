@@ -4,7 +4,7 @@ import unittest
 
 
 class TestExhibit(unittest.TestCase):
-    PORT_NUM = '51042'
+    PORT_NUM = '51056'
     print("Testing /exibit/")
     SITE_URL = 'http://student04.cse.nd.edu:' + PORT_NUM
     EXHIBIT_URL = SITE_URL + '/exhibit/'
@@ -23,10 +23,9 @@ class TestExhibit(unittest.TestCase):
         except ValueError:
             return False
 
-    def test_get_exhibits(self):
+    def test_get_exhibits_zoo(self):
         self.reset_data()
-        r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+        r = requests.get(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center' + '/true')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
@@ -44,18 +43,45 @@ class TestExhibit(unittest.TestCase):
             'ursus arctos horribilis',
         ])
 
+    def test_get_not_exhibited_zoo(self):
+        self.reset_data()
+        r = requests.get(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center' + '/false')
+        self.assertTrue(self.is_json(r.content.decode()))
+        resp = json.loads(r.content.decode())
+        self.assertEqual(resp['result'], 'success')
+        exhibits = resp['species']
+        self.assertIsInstance(exhibits, list)
+
+    def test_get_exhibits_species(self):
+        self.reset_data()
+        r = requests.get(self.EXHIBIT_URL + 'bison bison')
+        self.assertTrue(self.is_json(r.content.decode()))
+        resp = json.loads(r.content.decode())
+        self.assertEqual(resp['result'], 'success')
+        zoos = resp['zoos']
+        self.assertEqual(zoos,[
+            'Baton Rouge Zoo',
+            'Bronx Zoo',
+            'Brookfield Zoo',
+            'Chahinkapa Zoo',
+            'Connecticut\'s Beardsley Zoo',
+            'Fossil Rim Wildlife Center',
+            'Great Plains Zoo',
+            'Minnesota Zoo',
+            'North Carolina Zoo',
+            'Potawatomi Zoo'])
+	    
     def test_post_exhibit(self):
         self.reset_data()
         reqBody = {}
         reqBody['species'] = ['acanthurus olivaceus', 'acanthurus pyroferus']
-        r = requests.post(
-            self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center', data=json.dumps(reqBody))
+        r = requests.post(self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center', data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
         r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+                         'Grizzly and Wolf Discovery Center' + '/true')
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['species'], [
             'acanthurus olivaceus',
@@ -80,7 +106,7 @@ class TestExhibit(unittest.TestCase):
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
         r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+                         'Grizzly and Wolf Discovery Center' + '/true')
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['species'], [
             'aegolius acadicus',
