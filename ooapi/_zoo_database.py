@@ -62,6 +62,9 @@ class _zoo_database:
         with open(self.BASEURL+'exhibit.csv') as ef:
             for line in ef:
                 zoo, species = line.rstrip().split(',', 2)
+                species = species.replace(' ', '_')
+                zoo = ''.join(i for i in zoo.replace(' ', '_') if (i.isalpha() or i=='_'))
+
                 if zoo not in self.exhibit_zoo:
                     self.exhibit_zoo[zoo] = set()
                 self.exhibit_zoo[zoo].add(species)
@@ -176,6 +179,7 @@ class _zoo_database:
         with open(self.BASEURL+'species.csv') as spf:
             for line in spf:
                 species, common_name, genus, family, region, habitat, status = line.rstrip().split(',', 7)
+                species = species.replace(' ', '_')
                 common_names = set(common_name.split(';'))
                 regions = set(region.split(';'))
                 habitats = set(habitat.split(';'))
@@ -277,6 +281,7 @@ class _zoo_database:
         with open(self.BASEURL+'zoo.csv') as zf:
             for line in zf:
                 zoo, city, state, address, num_animals, acres, opening_time, closing_time, annual_visitors, website_url = line.rstrip().split(',', 10)
+                zoo = ''.join(i for i in zoo.replace(' ', '_') if (i.isalpha() or i=='_'))
                 self.zoo[zoo] = {
                     'city': city,
                     'state': state,

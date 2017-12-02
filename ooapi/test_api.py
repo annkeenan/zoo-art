@@ -44,79 +44,80 @@ class TestZooDatabase(unittest.TestCase):
     def test_get_exhibits_zoo(self):
         self.reset_database()
         exp_result = [
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'haliaeetus leucocephalus',
-            'ursus arctos horribilis'
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'haliaeetus_leucocephalus',
+            'ursus_arctos_horribilis'
         ]
-        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
+
+        result = self.zdb.get_exhibited_zoo('Grizzly_and_Wolf_Discovery_Center')
         self.assertEqual(result, exp_result)
 
     def test_get_not_exhibits_zoo(self):
         self.reset_database()
-        result = self.zdb.get_not_exhibited_zoo('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_not_exhibited_zoo('Grizzly_and_Wolf_Discovery_Center')
         self.assertIsInstance(result, list)
 
     def test_get_exhibits_species(self):
         self.reset_database()
         exp_result = [
-     		'Baton Rouge Zoo',
-			'Bronx Zoo',
-			'Brookfield Zoo',
-			'Chahinkapa Zoo',
-			'Connecticut\'s Beardsley Zoo',
-			'Fossil Rim Wildlife Center',
-			'Great Plains Zoo',
-			'Minnesota Zoo',
-			'North Carolina Zoo',
-			'Potawatomi Zoo'
+     		'Baton_Rouge_Zoo',
+			'Bronx_Zoo',
+			'Brookfield_Zoo',
+			'Chahinkapa_Zoo',
+			'Connecticuts_Beardsley_Zoo',
+			'Fossil_Rim_Wildlife_Center',
+			'Great_Plains_Zoo',
+			'Minnesota_Zoo',
+			'North_Carolina_Zoo',
+			'Potawatomi_Zoo'
         ]
-        result = self.zdb.get_exhibits_species('bison bison')
+        result = self.zdb.get_exhibits_species('bison_bison')
         self.assertEqual(result, exp_result)
 
 
     def test_post_exhibit(self):
         self.reset_database()
         exp_result = [
-            'acanthurus olivaceus',
-            'acanthurus pyroferus',
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'haliaeetus leucocephalus',
-            'ursus arctos horribilis',
+            'acanthurus_olivaceus',
+            'acanthurus_pyroferus',
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'haliaeetus_leucocephalus',
+            'ursus_arctos_horribilis'
         ]
-        add_species = ['acanthurus olivaceus', 'acanthurus pyroferus']
-        self.zdb.post_exhibit('Grizzly and Wolf Discovery Center', add_species)
-        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
+        add_species = ['acanthurus_olivaceus', 'acanthurus_pyroferus']
+        self.zdb.post_exhibit('Grizzly_and_Wolf_Discovery_Center', add_species)
+        result = self.zdb.get_exhibited_zoo('Grizzly_and_Wolf_Discovery_Center')
         self.assertEqual(result, exp_result)
 
     def test_delete_exhibit(self):
         self.reset_database()
         exp_result = [
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'haliaeetus leucocephalus'
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'haliaeetus_leucocephalus',
         ]
-        self.zdb.delete_exhibit('Grizzly and Wolf Discovery Center', 'ursus arctos horribilis')
-        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
+        self.zdb.delete_exhibit('Grizzly_and_Wolf_Discovery_Center', 'ursus_arctos_horribilis')
+        result = self.zdb.get_exhibited_zoo('Grizzly_and_Wolf_Discovery_Center')
         self.assertEqual(result, exp_result)
 
 ## Habitat table tests
@@ -176,7 +177,7 @@ class TestZooDatabase(unittest.TestCase):
             'habitat': habitats,
             'status': 'CR'
         }
-        result = self.zdb.get_species('ara glaucogularis')
+        result = self.zdb.get_species('ara_glaucogularis')
         self.assertEqual(result, exp_result)
 
     def test_put_species(self):
@@ -193,12 +194,12 @@ class TestZooDatabase(unittest.TestCase):
             'habitat': habitats,
             'status': 'EX'
         }
-        self.zdb.post_species('canis dirus', info)
+        self.zdb.post_species('canis_dirus', info)
         # Update the species
         exp_result = info
         exp_result['Status'] = 'EW'
-        self.zdb.put_species('canis dirus', 'Status', 'EW')
-        result = self.zdb.get_species('canis dirus')
+        self.zdb.put_species('canis_dirus', 'Status', 'EW')
+        result = self.zdb.get_species('canis_dirus')
         self.assertEqual(result, exp_result)
 
     def test_post_species(self):
@@ -214,8 +215,8 @@ class TestZooDatabase(unittest.TestCase):
             'habitat': habitats,
             'status': 'EX'
         }
-        self.zdb.post_species('canis dirus', exp_result)
-        result = self.zdb.get_species('canis dirus')
+        self.zdb.post_species('canis_dirus', exp_result)
+        result = self.zdb.get_species('canis_dirus')
         self.assertEqual(result, exp_result)
 
 ## State table tests
@@ -261,7 +262,7 @@ class TestZooDatabase(unittest.TestCase):
             'annual visitors': 175000,
             'website url': 'http://abilenezoo.org/'
         }
-        result = self.zdb.get_zoo('Abilene Zoo')
+        result = self.zdb.get_zoo('Abilene_Zoo')
         self.assertEqual(result, exp_result)
 
     def test_put_zoo(self):
@@ -277,8 +278,8 @@ class TestZooDatabase(unittest.TestCase):
             'annual visitors': 200000,
             'website url': 'http://abilenezoo.org/'
         }
-        self.zdb.put_zoo('Abilene Zoo', 'annual visitors', 200000)
-        result = self.zdb.get_zoo('Abilene Zoo')
+        self.zdb.put_zoo('Abilene_Zoo', 'annual visitors', 200000)
+        result = self.zdb.get_zoo('Abilene_Zoo')
         self.assertEqual(result, exp_result)
 
     def test_post_zoo(self):
@@ -294,8 +295,8 @@ class TestZooDatabase(unittest.TestCase):
             'annual visitors': 45000,
             'website url': 'http://zoo.org/'
         }
-        self.zdb.post_zoo('Test Zoo', exp_result)
-        result = self.zdb.get_zoo('Test Zoo')
+        self.zdb.post_zoo('Test_Zoo', exp_result)
+        result = self.zdb.get_zoo('Test_Zoo')
         self.assertEqual(result, exp_result)
 
 

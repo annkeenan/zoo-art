@@ -34,7 +34,7 @@ class TestZoo(unittest.TestCase):
 
     def test_get_zoo(self):
         self.reset_data()
-        r = requests.get(self.ZOO_URL + 'Abilene Zoo')
+        r = requests.get(self.ZOO_URL + 'Abilene_Zoo')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
@@ -54,13 +54,13 @@ class TestZoo(unittest.TestCase):
         self.reset_data()
         reqBody = {}
         reqBody['annual visitors'] = 15000
-        r = requests.put(self.ZOO_URL + 'Abilene Zoo',
+        r = requests.put(self.ZOO_URL + 'Abilene_Zoo',
                          data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.ZOO_URL + 'Abilene Zoo')
+        r = requests.get(self.ZOO_URL + 'Abilene_Zoo')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
@@ -78,7 +78,7 @@ class TestZoo(unittest.TestCase):
 
     def test_post_zoo(self):
         self.reset_data()
-        reqBody = {'zoo': 'Fake Zoo', 'info': {
+        reqBody = {'zoo': 'Fake_Zoo', 'info': {
             'city': 'Anaheim',
             'state': 'CA',
             'address': '1234 Zoo Lane',
@@ -94,7 +94,7 @@ class TestZoo(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        r = requests.get(self.ZOO_URL + 'Fake Zoo')
+        r = requests.get(self.ZOO_URL + 'Fake_Zoo')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
