@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Zoo Art</title>
+  <meta name="description" content="">
+  <meta name="author" content="Ann Keenan, Taylor Murray, Ronni Sardina">
+  <meta name="viewport" content="width=device-width">
+  <link rel="icon" type="image/x-icon" href="">
+  <link href="https://fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+  <link rel="stylesheet" href="css/main.css">
+</head>
+
+<body>
+  <nav class="navbar navbar-fixed-top navbar-default">
+    <div class="navbar-title">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar-collapse" aria-expanded="false">
+          <i class="fa fa-bars"></i>
+        </button>
+      </div>
+    </div>
+    <div class="container">
+      <div class="collapse navbar-collapse" id="navbar-collapse">
+        <ul class="nav navbar-nav">
+          <li><a href="list_zoos.html">List Zoos</a></li>
+          <li><a href="list_species.html">List Species</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="container body">
+    <h2>Edit Zoo</h2>
+    <hr>
+    <form method="post">
+      <div class="form-group row">
+        <div class="col-lg-8 col-sm-6 col-xs-12">
+          <strong>Zoo Name </strong><input name="zoo_name" id="id_zoo_name" type="text" class="form-control" value="" maxlength="100" required>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-xs-6">
+          <label><strong>Opens </strong></label><br>
+          <select name="open_hour" id="id_open_hour">
+          </select> :
+          <select name="open_minute" id="id_open_minute">
+          </select>
+        </div>
+        <div class="col-lg-2 col-sm-3 col-xs-6">
+          <label><strong>Closes </strong></label><br>
+          <select name="close_hour" id="id_close_hour">
+          </select> :
+          <select name="close_minute" id="id_close_minute">
+          </select>
+        </div>
+      </div>
+      <div class="form-group row">
+        <div class="col-xs-12">
+          <strong>Website </strong><input name="website" id="id_website" type="text" class="form-control" value="" maxlength="100" required>
+        </div>
+      </div>
+      <br>
+      <h3>Location</h3>
+      <hr>
+      <div class="form-group row">
+        <div class="col-md-7 col-sm-6 col-xs-12">
+          <strong>Address </strong><input name="address" id="id_address" type="text" class="form-control" value="" maxlength="100" required>
+        </div>
+        <div class="col-sm-4 col-xs-10">
+          <strong>City </strong><input name="city" id="id_city" type="text" class="form-control" value="" maxlength="50" required>
+        </div>
+        <div class="col-sm-1 col-xs-2">
+          <label><strong>State </strong></label><br>
+          <select name="state" id="id_state">
+          </select>
+        </div>
+      </div>
+      <br>
+      <h3>Statistics</h3>
+      <hr>
+      <div class="form-group row">
+        <div class="col-sm-4 col-xs-6">
+          <strong>Number of Animals </strong><input name="num_animals" type="number" class="form-control" value="" required>
+        </div>
+        <div class="col-sm-4 col-xs-6">
+          <strong>Number of Annual Visitors </strong><input name="annual_visitors" type="number" class="form-control" value="" required>
+        </div>
+        <div class="col-sm-4 col-xs-12">
+          <strong>Acres </strong><input name="acres" type="number" class="form-control" value="" required>
+        </div>
+      </div>
+      <br>
+      <hr>
+      <div>
+        <input class="btn btn-primary" type="submit" name="add" value="Add Zoo" />
+      </div>
+    </form>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+  <script src="scripts/add_zoo.js"></script>
+</body>
+
+</html>

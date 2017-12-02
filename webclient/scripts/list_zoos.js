@@ -18,7 +18,7 @@ function createLinks(data) {
     zoo_name = data.zoos[i].split('_').join(' ');
     links += '<li><a href="zoo.html?zoo=' + data.zoos[i] + '">' + zoo_name + '</a></li>'
   }
-  links += '</ul>'
+  links += '</ul>';
   html = $.parseHTML(links);
   $('#zoos').append(html);
 }

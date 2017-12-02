@@ -18,7 +18,7 @@ function createLinks(data) {
     species_name = data.species[i].replace('_', ' ');
     links += '<li><a href="species.html?species=' + data.species[i] + '">' + species_name + '</a></li>'
   }
-  links += '</ul>'
+  links += '</ul>';
   html = $.parseHTML(links);
   $('#species').append(html);
 }
