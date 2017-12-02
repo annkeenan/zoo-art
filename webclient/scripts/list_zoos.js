@@ -14,9 +14,9 @@ function getZoos() {
 // Add links to the page
 function createLinks(data) {
   links = '<ul>';
-  for (var z in data.zoos) {
-    zoo_name = z.replace('_', ' ');
-    links += '<li><a href="/zoo.html?zoo=' + z + '">' + zoo_name + '</a></li>'
+  for (var i in data.zoos) {
+    zoo_name = data.zoos[i].split('_').join(' ');
+    links += '<li><a href="zoo.html?zoo=' + data.zoos[i] + '">' + zoo_name + '</a></li>'
   }
   links += '</ul>'
   html = $.parseHTML(links);
