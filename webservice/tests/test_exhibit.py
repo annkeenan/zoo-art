@@ -26,72 +26,70 @@ class TestExhibit(unittest.TestCase):
     def test_get_exhibits(self):
         self.reset_data()
         r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+                         'Grizzly_and_Wolf_Discovery_Center')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
         exhibits = resp['species']
         self.assertEqual(exhibits, [
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'haliaeetus leucocephalus',
-            'ursus arctos horribilis',
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'haliaeetus_leucocephalus',
+            'ursus_arctos_horribilis'
         ])
 
     def test_post_exhibit(self):
         self.reset_data()
         reqBody = {}
-        reqBody['species'] = ['acanthurus olivaceus', 'acanthurus pyroferus']
+        reqBody['species'] = ['acanthurus_olivaceus', 'acanthurus_pyroferus']
         r = requests.post(
-            self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center', data=json.dumps(reqBody))
+            self.EXHIBIT_URL + 'Grizzly_and_Wolf_Discovery_Center', data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+        r = requests.get(self.EXHIBIT_URL + 'Grizzly_and_Wolf_Discovery_Center')
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['species'], [
-            'acanthurus olivaceus',
-            'acanthurus pyroferus',
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'haliaeetus leucocephalus',
-            'ursus arctos horribilis',
+            'acanthurus_olivaceus',
+            'acanthurus_pyroferus',
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'haliaeetus_leucocephalus',
+            'ursus_arctos_horribilis'
         ])
 
     def test_delete_exhibit(self):
         self.reset_data()
         r = requests.delete(
-            self.EXHIBIT_URL + 'Grizzly and Wolf Discovery Center' + '/haliaeetus leucocephalus')
+            self.EXHIBIT_URL + 'Grizzly_and_Wolf_Discovery_Center' + '/haliaeetus_leucocephalus')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        r = requests.get(self.EXHIBIT_URL +
-                         'Grizzly and Wolf Discovery Center')
+        r = requests.get(self.EXHIBIT_URL + 'Grizzly_and_Wolf_Discovery_Center')
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['species'], [
-            'aegolius acadicus',
-            'buteo jamaicensis',
-            'buteo lagopus',
-            'canis lupus',
-            'canis lupus familiaris',
-            'cathartes aura',
-            'falco peregrinus',
-            'falco sparverius',
-            'ursus arctos horribilis',
+            'aegolius_acadicus',
+            'buteo_jamaicensis',
+            'buteo_lagopus',
+            'canis_lupus',
+            'canis_lupus_familiaris',
+            'cathartes_aura',
+            'falco_peregrinus',
+            'falco_sparverius',
+            'ursus_arctos_horribilis'
         ])
 
 

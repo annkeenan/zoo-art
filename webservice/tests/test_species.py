@@ -34,11 +34,11 @@ class TestExhibit(unittest.TestCase):
 
     def test_get_species(self):
         self.reset_data()
-        r = requests.get(self.SPECIES_URL + 'ara glaucogularis')
+        r = requests.get(self.SPECIES_URL + 'ara_glaucogularis')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['ara glaucogularis'], {
+        self.assertEqual(resp['ara_glaucogularis'], {
             'common name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
@@ -51,17 +51,17 @@ class TestExhibit(unittest.TestCase):
         reqBody = {}
         reqBody['status'] = 'EW'
         reqBody['habitat'] = ['rainforest']
-        r = requests.put(self.SPECIES_URL + 'ara glaucogularis',
+        r = requests.put(self.SPECIES_URL + 'ara_glaucogularis',
                          data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
 
-        r = requests.get(self.SPECIES_URL + 'ara glaucogularis')
+        r = requests.get(self.SPECIES_URL + 'ara_glaucogularis')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['ara glaucogularis'], {
+        self.assertEqual(resp['ara_glaucogularis'], {
             'common name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
@@ -72,7 +72,7 @@ class TestExhibit(unittest.TestCase):
     def test_post_species(self):
         self.reset_data()
         reqBody = {}
-        reqBody = {'species': 'canis dirus', 'info': {
+        reqBody = {'species': 'canis_dirus', 'info': {
             'common name': ['Dire wolf'],
             'genus': 'canis',
             'family': 'canidae',
@@ -84,11 +84,11 @@ class TestExhibit(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        r = requests.get(self.SPECIES_URL + 'canis dirus')
+        r = requests.get(self.SPECIES_URL + 'canis_dirus')
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['canis dirus'], {
+        self.assertEqual(resp['canis_dirus'], {
             'common name': ['Dire wolf'],
             'genus': 'canis',
             'family': 'canidae',
