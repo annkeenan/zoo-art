@@ -41,7 +41,7 @@ class TestZooDatabase(unittest.TestCase):
         self.assertEqual(result, exp_result)
 
 ## Exhibit table tests
-    def test_get_exhibits(self):
+    def test_get_exhibits_zoo(self):
         self.reset_database()
         exp_result = [
             'aegolius acadicus',
@@ -55,8 +55,31 @@ class TestZooDatabase(unittest.TestCase):
             'haliaeetus leucocephalus',
             'ursus arctos horribilis'
         ]
-        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
+
+    def test_get_not_exhibits_zoo(self):
+        self.reset_database()
+        result = self.zdb.get_not_exhibited_zoo('Grizzly and Wolf Discovery Center')
+        self.assertIsInstance(result, list)
+
+    def test_get_exhibits_species(self):
+        self.reset_database()
+        exp_result = [
+     		'Baton Rouge Zoo',
+			'Bronx Zoo',
+			'Brookfield Zoo',
+			'Chahinkapa Zoo',
+			'Connecticut\'s Beardsley Zoo',
+			'Fossil Rim Wildlife Center',
+			'Great Plains Zoo',
+			'Minnesota Zoo',
+			'North Carolina Zoo',
+			'Potawatomi Zoo'
+        ]
+        result = self.zdb.get_exhibits_species('bison bison')
+        self.assertEqual(result, exp_result)
+
 
     def test_post_exhibit(self):
         self.reset_database()
@@ -76,7 +99,7 @@ class TestZooDatabase(unittest.TestCase):
         ]
         add_species = ['acanthurus olivaceus', 'acanthurus pyroferus']
         self.zdb.post_exhibit('Grizzly and Wolf Discovery Center', add_species)
-        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
     def test_delete_exhibit(self):
@@ -93,7 +116,7 @@ class TestZooDatabase(unittest.TestCase):
             'haliaeetus leucocephalus'
         ]
         self.zdb.delete_exhibit('Grizzly and Wolf Discovery Center', 'ursus arctos horribilis')
-        result = self.zdb.get_exhibits('Grizzly and Wolf Discovery Center')
+        result = self.zdb.get_exhibited_zoo('Grizzly and Wolf Discovery Center')
         self.assertEqual(result, exp_result)
 
 ## Habitat table tests

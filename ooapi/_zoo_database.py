@@ -7,7 +7,8 @@ class _zoo_database:
     # Recreate all dict objects
     def reset_all(self):
         self.classification = dict()
-        self.exhibit = dict()
+        self.exhibit_species = dict()
+        self.exhibit_zoo = dict()
         self.habitat = dict()
         self.region = dict()
         self.species = dict()
@@ -61,18 +62,40 @@ class _zoo_database:
         with open(self.BASEURL+'exhibit.csv') as ef:
             for line in ef:
                 zoo, species = line.rstrip().split(',', 2)
-                if zoo not in self.exhibit:
-                    self.exhibit[zoo] = set()
-                self.exhibit[zoo].add(species)
+                if zoo not in self.exhibit_zoo:
+                    self.exhibit_zoo[zoo] = set()
+                self.exhibit_zoo[zoo].add(species)
+
+                if species not in self.exhibit_species:
+                    self.exhibit_species[species] = set()
+                self.exhibit_species[species].add(zoo)
 
     # Get all animals exhibited at a zoo in alphabetical order
-    def get_exhibits(self, zoo):
-        if zoo in self.exhibit:
-            return sorted(self.exhibit[zoo])
+    def get_exhibited_zoo(self, zoo):
+        if zoo in self.exhibit_zoo:
+            return sorted(self.exhibit_zoo[zoo])
+        else:
+            return None
+    # Get the species that are not at a zoo
+    def get_not_exhibited_zoo(self, zoo):
+        exhibited_species = self.get_exhibited_zoo(zoo)
+        if zoo in self.exhibit_zoo:
+            not_exhibited = []
+            for _species in self.species:
+                if _species not in exhibited_species:
+                    not_exhibited.append(_species)
+            return not_exhibited
+        else:
+            return None
+	# Get all the zoos that a species are in
+    def get_exhibits_species(self, species):
+        if species in self.exhibit_species:
+            return sorted(self.exhibit_species[species])
         else:
             return None
 
     # Add animal(s) to a zoo exhibit as a set
+	# Add zoo(s) to a animal's zoos
     def post_exhibit(self, zoo, species):
         # Only add to exhibit if zoo and all species exist
         if zoo not in self.zoo:
@@ -81,15 +104,27 @@ class _zoo_database:
             if _species not in self.species:
                 raise ValueError('"%s" is not an existing species' % _species)
         # Add the species to the zoo exhibit
-        if zoo not in self.exhibit:
-            self.exhibit[zoo] = set()
+        if zoo not in self.exhibit_zoo:
+            self.exhibit_zoo[zoo] = set()
         else:
-            self.exhibit[zoo].update(species)
+            self.exhibit_zoo[zoo].update(species)
 
-    # Remove an animal from a zoo exhibit
+        # Add the zoo to the species 
+        for _species in species:
+            if _species not in self.exhibit_species:
+                self.exhibit_species[_species] = set()
+            else:
+                self.exhibit_species[_species].update(zoo)
+
+
+
+    # Remove an animal from a zoo exhibit and remove that zoo from that animal
     def delete_exhibit(self, zoo, species):
-        if zoo in self.exhibit and species in self.exhibit[zoo]:
-            self.exhibit[zoo].remove(species)
+        if zoo in self.exhibit_zoo and species in self.exhibit_zoo[zoo]:
+            self.exhibit_zoo[zoo].remove(species)
+        if species in self.exhibit_species and zoo in self.exhibit_species[species]:
+            self.exhibit_species[species].remove(zoo)
+
 
 ## Habitat table
     # Load from habitat.csv
