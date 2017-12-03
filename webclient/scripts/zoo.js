@@ -4,6 +4,8 @@ function getZoo() {
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
       response = JSON.parse(xmlHttp.response);
+      var link = document.getElementById("editLink");
+      link.setAttribute("href", "edit_zoo.html?zoo=" + zooString)
       displayZoo(response, zooString);
     }
   }
