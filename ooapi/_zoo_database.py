@@ -79,6 +79,7 @@ class _zoo_database:
             return sorted(self.exhibit_zoo[zoo])
         else:
             return None
+
     # Get the species that are not at a zoo
     def get_not_exhibited_zoo(self, zoo):
         exhibited_species = self.get_exhibited_zoo(zoo)
@@ -90,6 +91,7 @@ class _zoo_database:
             return not_exhibited
         else:
             return None
+
 	# Get all the zoos that a species are in
     def get_exhibits_species(self, species):
         if species in self.exhibit_species:
@@ -119,15 +121,12 @@ class _zoo_database:
             else:
                 self.exhibit_species[_species].update(zoo)
 
-
-
     # Remove an animal from a zoo exhibit and remove that zoo from that animal
     def delete_exhibit(self, zoo, species):
         if zoo in self.exhibit_zoo and species in self.exhibit_zoo[zoo]:
             self.exhibit_zoo[zoo].remove(species)
         if species in self.exhibit_species and zoo in self.exhibit_species[species]:
             self.exhibit_species[species].remove(zoo)
-
 
 ## Habitat table
     # Load from habitat.csv
@@ -183,15 +182,13 @@ class _zoo_database:
                 common_names = set(common_name.split(';'))
                 regions = set(region.split(';'))
                 habitats = set(habitat.split(';'))
-
                 self.species[species] = {
                     'common_name': common_names,
                     'genus': genus,
                     'family': family,
                     'region': regions,
                     'habitat': habitats,
-                    'status': status
-                }
+                    'status': status}
 
     # Get a list of all species in alphabetical order
     def get_all_species(self):
@@ -209,7 +206,7 @@ class _zoo_database:
             raise ValueError('"%s" is not an existing species' % species)
         # If the column is a set, pass in a set as info and update existing set
         if type(self.species[species][column]) is set:
-            self.species[species][column].update(info)
+            self.species[species][column] = set(info)
         # Otherwise pass in a string and replace current string
         else:
             self.species[species][column] = info
@@ -257,8 +254,7 @@ class _zoo_database:
                 level, status, description = line.rstrip().split(',')
                 self.status[status] = {
                     'level': int(level),
-                    'description': description
-                }
+                    'description': description}
 
     # Get a list of the statuses in order
     def get_statuses(self):
@@ -291,8 +287,7 @@ class _zoo_database:
                     'opening_time': opening_time,
                     'closing_time': closing_time,
                     'annual_visitors': int(annual_visitors),
-                    'website_url': website_url
-                }
+                    'website_url': website_url}
 
     # Get a list of all zoos in alphabetical order
     def get_zoos(self):
