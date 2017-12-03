@@ -63,7 +63,7 @@ class TestExhibit(unittest.TestCase):
             'genus': 'ara',
             'family': 'psittacidae',
             'region': ['neotropical'],
-            'habitat': ['forest', 'rainforest', 'savanna/grassland'],
+            'habitat': ['rainforest'],
             'status': 'EW'})
 
     def test_post_species(self):
