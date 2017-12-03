@@ -51,7 +51,37 @@ function add_zoo() {
   }
 
   function processForm() {
-    console.log('processing');
+    zoo_name = $('#id_zoo_name').val().split(' ').join('_');
+    opening_time = $('#id_opening_hour').val() + ':' + $('#id_opening_minute').val();
+    closing_time = $('#id_closing_hour').val() + ':' + $('#id_closing_minute').val();
+    var dict = JSON.stringify({
+      "zoo": zoo_name,
+      "info": {
+        "city": $('#id_city').val(),
+        "state": $('#id_state').val(),
+        "address": $('#id_address').val(),
+        "num_animals": $('#num_animals').val(),
+        "acres": $('#id_acres').val(),
+        "opening_time": opening_time,
+        "closing_time": closing_time,
+        "annual_visitors": $('#id_annual_visitors').val(),
+        "website_url": $('#id_website').val()
+      }
+    });
+
+    var xmlHttp = new XMLHttpRequest();
+    xmlHttp.onreadystatechange = function() {
+      if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+        response = JSON.parse(xmlHttp.response);
+        if (response.result == 'success') {
+          location.href = "zoo.html?zoo=" + zoo_name;
+        } else {
+          location.href = "list_zoos.html";
+        }
+      }
+    }
+    xmlHttp.open("POST", "http://student04.cse.nd.edu:51042/zoo/", true);
+    xmlHttp.send(dict);
   }
 }
 
