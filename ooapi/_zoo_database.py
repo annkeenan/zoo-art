@@ -63,7 +63,7 @@ class _zoo_database:
             for line in ef:
                 zoo, species = line.rstrip().split(',', 2)
                 species = species.replace(' ', '_')
-                zoo = ''.join(i for i in zoo.replace(' ', '_') if (i.isalpha() or i=='_'))
+                zoo = ''.join(i for i in zoo.replace(' ', '_') if (i.isalpha() or i == '_'))
 
                 if zoo not in self.exhibit_zoo:
                     self.exhibit_zoo[zoo] = set()
@@ -226,7 +226,7 @@ class _zoo_database:
             if habitat not in self.habitat:
                 raise ValueError('"%s" is not an existing habitat' % habitat)
         # Convert lists to sets
-        info['common_name'] = set(info['common name'])
+        info['common_name'] = set(info['common_name'])
         info['region'] = set(info['region'])
         info['habitat'] = set(info['habitat'])
         self.species[new_species] = info

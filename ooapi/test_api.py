@@ -278,7 +278,7 @@ class TestZooDatabase(unittest.TestCase):
             'annual_visitors': 200000,
             'website_url': 'http://abilenezoo.org/'
         }
-        self.zdb.put_zoo('Abilene_Zoo', 'annual visitors', 200000)
+        self.zdb.put_zoo('Abilene_Zoo', 'annual_visitors', 200000)
         result = self.zdb.get_zoo('Abilene_Zoo')
         self.assertEqual(result, exp_result)
 
