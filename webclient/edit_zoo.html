@@ -35,47 +35,67 @@
   </nav>
 
   <div class="container body">
-    <h2>Edit Zoo</h2>
+    <h2>Add Zoo</h2>
     <hr>
-    <form method="post">
+    <form method="post" id="id_zoo_form">
       <div class="form-group row">
         <div class="col-lg-8 col-sm-6 col-xs-12">
-          <strong>Zoo Name </strong><input name="zoo_name" id="id_zoo_name" type="text" class="form-control" value="" maxlength="100" required>
+          <label class="control-label" for="id_zoo_name">Zoo Name</label>
+          <input name="zoo_name" id="id_zoo_name" type="text" class="form-control" value="" placeholder="ex: Abilene Zoo" maxlength="100" required aria-describedby="id_close_help">
+          <small id="id_close_help" class="form-text text-muted">Only alpha characters allowed (no apostrophes, periods, etc.)</small>
         </div>
         <div class="col-lg-2 col-sm-3 col-xs-6">
-          <label><strong>Opens </strong></label><br>
-          <select name="open_hour" id="id_open_hour">
-          </select> :
-          <select name="open_minute" id="id_open_minute">
-          </select>
+          <label class="control-label" for="id_open_hour">Opening Time</label>
+          <div class="row">
+            <div class="col-xs-6">
+              <select name="open_hour" id="id_open_hour" class="form-control" aria-describedby="id_open_hour_help"></select>
+              <small id="id_open_hour_help" class="form-text text-muted">24-hour format</small>
+            </div>
+            <div class="col-xs-6">
+              <select name="open_minute" id="id_open_minute" class="form-control" aria-describedby="id_open_minute_help"></select>
+              <small id="id_open_hour_help" class="form-text text-muted">minute</small>
+            </div>
+          </div>
         </div>
         <div class="col-lg-2 col-sm-3 col-xs-6">
-          <label><strong>Closes </strong></label><br>
-          <select name="close_hour" id="id_close_hour">
-          </select> :
-          <select name="close_minute" id="id_close_minute">
-          </select>
+          <label class="control-label" for="id_close_hour">Closing Time</label>
+          <div class="row">
+            <div class="col-xs-6">
+              <select name="close_hour" id="id_close_hour" class="form-control" aria-describedby="id_close_hour_help"></select>
+              <small id="id_close_hour_help" class="form-text text-muted">24-hour format</small>
+            </div>
+            <div class="col-xs-6">
+              <select name="close_minute" id="id_close_minute" class="form-control" aria-describedby="id_close_minute_help"></select>
+              <small id="id_close_minute_help" class="form-text text-muted">minute</small>
+            </div>
+          </div>
         </div>
       </div>
       <div class="form-group row">
         <div class="col-xs-12">
-          <strong>Website </strong><input name="website" id="id_website" type="text" class="form-control" value="" maxlength="100" required>
+          <label class="control-label" for="id_website">Website</label>
+          <input name="website" id="id_website" type="text" class="form-control" value="" placeholder="ex: http://abilenezoo.org/" maxlength="100" required>
         </div>
       </div>
       <br>
       <h3>Location</h3>
       <hr>
       <div class="form-group row">
-        <div class="col-md-7 col-sm-6 col-xs-12">
-          <strong>Address </strong><input name="address" id="id_address" type="text" class="form-control" value="" maxlength="100" required>
+        <div class="col-md-6 col-sm-6 col-xs-12">
+          <label class="control-label" for="id_address">Address</label>
+          <input name="address" id="id_address" type="text" class="form-control" value="" placeholder="ex: 2070 Zoo Lane" maxlength="100" required>
         </div>
-        <div class="col-sm-4 col-xs-10">
-          <strong>City </strong><input name="city" id="id_city" type="text" class="form-control" value="" maxlength="50" required>
+        <div class="col-sm-4 col-xs-9">
+          <label class="control-label" for="id_city">City</label>
+          <input name="city" id="id_city" type="text" class="form-control" value="" placeholder="ex: Abilene" maxlength="50" required>
         </div>
-        <div class="col-sm-1 col-xs-2">
-          <label><strong>State </strong></label><br>
-          <select name="state" id="id_state">
+        <div class="col-sm-2 col-xs-3">
+          <label class="control-label" for="id_state">State</label>
+          <br>
+          <select name="state" id="id_state" class="form-control" aria-describedby="id_state_help">
+          <br>
           </select>
+          <small id="id_state_help" class="form-text text-muted">State abbreviation</small>
         </div>
       </div>
       <br>
@@ -83,13 +103,19 @@
       <hr>
       <div class="form-group row">
         <div class="col-sm-4 col-xs-6">
-          <strong>Number of Animals </strong><input name="num_animals" type="number" class="form-control" value="" required>
+          <label class="control-label" for="id_num_animals">Number of Animals</label>
+          <input name="num_animals" id="id_num_animals" type="number" class="form-control" value="" placeholder="ex: 1100" required aria-describedby="id_num_animals_help">
+          <small id="id_num_animals_help" class="form-text text-muted">No commas</small>
         </div>
         <div class="col-sm-4 col-xs-6">
-          <strong>Number of Annual Visitors </strong><input name="annual_visitors" type="number" class="form-control" value="" required>
+          <label class="control-label" for="id_annual_visitors">Number of Annual Visitors</label>
+          <input name="annual_visitors" id="id_annual_visitors" type="number" class="form-control" value="" placeholder="ex: 175000" required aria-describedby="id_annual_visitors_help">
+          <small id="id_annual_visitors_help" class="form-text text-muted">No commas</small>
         </div>
         <div class="col-sm-4 col-xs-12">
-          <strong>Acres </strong><input name="acres" type="number" class="form-control" value="" required>
+          <label class="control-label" for="id_annual_visitors">Acres</label>
+          <input name="acres" id="id_acres" type="number" class="form-control" value="" placeholder="ex: 13" required aria-describedby="id_acres_help">
+          <small id="id_acres_help" class="form-text text-muted">No commas</small>
         </div>
       </div>
       <br>
@@ -102,7 +128,7 @@
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
-  <script src="scripts/add_zoo.js"></script>
+  <script src="scripts/edit_zoo.js"></script>
 </body>
 
 </html>
