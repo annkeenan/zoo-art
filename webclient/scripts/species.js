@@ -4,6 +4,8 @@ function getSpecies() {
   xmlHttp.onreadystatechange = function() {
     if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
       response = JSON.parse(xmlHttp.response);
+      var link = document.getElementById("editLink");
+      link.setAttribute("href", "edit_species.html?species=" + speciesString);
       displaySpecies(response, speciesString);
     }
   }
