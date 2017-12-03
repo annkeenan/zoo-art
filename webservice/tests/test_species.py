@@ -39,7 +39,7 @@ class TestExhibit(unittest.TestCase):
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
         self.assertEqual(resp['ara_glaucogularis'], {
-            'common name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
+            'common_name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
             'region': ['neotropical'],
@@ -62,7 +62,7 @@ class TestExhibit(unittest.TestCase):
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
         self.assertEqual(resp['ara_glaucogularis'], {
-            'common name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
+            'common_name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
             'region': ['neotropical'],
@@ -73,7 +73,7 @@ class TestExhibit(unittest.TestCase):
         self.reset_data()
         reqBody = {}
         reqBody = {'species': 'canis_dirus', 'info': {
-            'common name': ['Dire wolf'],
+            'common_name': ['Dire wolf'],
             'genus': 'canis',
             'family': 'canidae',
             'region': ['holarctic'],
@@ -89,7 +89,7 @@ class TestExhibit(unittest.TestCase):
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
         self.assertEqual(resp['canis_dirus'], {
-            'common name': ['Dire wolf'],
+            'common_name': ['Dire wolf'],
             'genus': 'canis',
             'family': 'canidae',
             'region': ['holarctic'],

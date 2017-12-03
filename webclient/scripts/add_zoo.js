@@ -12,7 +12,7 @@ function add_zoo() {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        state_info = JSON.parse(xmlHttp.response);
+        response = JSON.parse(xmlHttp.response);
         createForm(response);
       }
     }

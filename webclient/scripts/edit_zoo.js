@@ -14,7 +14,12 @@ function edit_zoo(zoo) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        zoo_info = JSON.parse(xmlHttp.response);
+        response = JSON.parse(xmlHttp.response);
+        if (response.result == 'success') {
+          zoo_info = response.zoo;
+        } else {
+          zoo_info = {}
+        }
         getStates();
       }
     }
@@ -27,7 +32,12 @@ function edit_zoo(zoo) {
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
-        state_info = JSON.parse(xmlHttp.response);
+        response = JSON.parse(xmlHttp.response);
+        if (response.result == 'success') {
+          state_info = response.states;
+        } else {
+          state_info = {}
+        }
         createForm();
       }
     }
@@ -52,8 +62,8 @@ function edit_zoo(zoo) {
 
     // States
     state_options = '';
-    for (var i in state_info.states) {
-      state_options += '<option value="' + state_info.states[i] + '">'+ state_info.states[i] + '</option>'
+    for (var i in state_info) {
+      state_options += '<option value="' + state_info[i] + '">'+ state_info[i] + '</option>'
     }
     $('#id_state').append($.parseHTML(state_options));
 
@@ -61,6 +71,12 @@ function edit_zoo(zoo) {
 
   function createForm() {
     createDropdowns();
+    $('#id_zoo_name').val(zoo.split('_').join(' '));
+    $('#id_zoo_website').val(zoo_info.'website url');
+  }
+
+  function processForm() {
+    console.log('processing');
   }
 }
 

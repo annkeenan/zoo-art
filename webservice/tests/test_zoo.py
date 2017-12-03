@@ -42,18 +42,18 @@ class TestZoo(unittest.TestCase):
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
-            'number of animals': 1100,
+            'num_animals': 1100,
             'acres': 13,
-            'opening time': '9:00',
-            'closing time': '17:00',
-            'annual visitors': 175000,
-            'website url': 'http://abilenezoo.org/'
+            'opening_time': '9:00',
+            'closing_time': '17:00',
+            'annual_visitors': 175000,
+            'website_url': 'http://abilenezoo.org/'
         })
 
     def test_put_zoo(self):
         self.reset_data()
         reqBody = {}
-        reqBody['annual visitors'] = 15000
+        reqBody['annual_visitors'] = 15000
         r = requests.put(self.ZOO_URL + 'Abilene_Zoo',
                          data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
@@ -68,12 +68,12 @@ class TestZoo(unittest.TestCase):
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
-            'number of animals': 1100,
+            'num_animals': 1100,
             'acres': 13,
-            'opening time': '9:00',
-            'closing time': '17:00',
-            'annual visitors': 15000,
-            'website url': 'http://abilenezoo.org/'
+            'opening_time': '9:00',
+            'closing_time': '17:00',
+            'annual_visitors': 15000,
+            'website_url': 'http://abilenezoo.org/'
         })
 
     def test_post_zoo(self):
@@ -82,12 +82,12 @@ class TestZoo(unittest.TestCase):
             'city': 'Anaheim',
             'state': 'CA',
             'address': '1234 Zoo Lane',
-            'number of animals': 1700,
+            'num_animals': 1700,
             'acres': 38,
-            'opening time': '8:00',
-            'closing time': '17:00',
-            'annual visitors': 185000,
-            'website url': 'http://fakezoo.org/'
+            'opening_time': '8:00',
+            'closing_time': '17:00',
+            'annual_visitors': 185000,
+            'website_url': 'http://fakezoo.org/'
         }}
 
         r = requests.post(self.ZOO_URL, data=json.dumps(reqBody))
@@ -102,12 +102,12 @@ class TestZoo(unittest.TestCase):
             'city': 'Anaheim',
             'state': 'CA',
             'address': '1234 Zoo Lane',
-            'number of animals': 1700,
+            'num_animals': 1700,
             'acres': 38,
-            'opening time': '8:00',
-            'closing time': '17:00',
-            'annual visitors': 185000,
-            'website url': 'http://fakezoo.org/'
+            'opening_time': '8:00',
+            'closing_time': '17:00',
+            'annual_visitors': 185000,
+            'website_url': 'http://fakezoo.org/'
         })
 
 

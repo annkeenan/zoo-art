@@ -170,7 +170,7 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['neotropical'])
         habitats = set(['savanna/grassland', 'forest'])
         exp_result = {
-            'common name': common_names,
+            'common_name': common_names,
             'genus': 'ara',
             'family': 'psittacidae',
             'region': regions,
@@ -187,7 +187,7 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['holarctic'])
         habitats = set(['tundra'])
         info = {
-            'common name': common_names,
+            'common_name': common_names,
             'genus': 'canis',
             'family': 'canidae',
             'region': regions,
@@ -208,7 +208,7 @@ class TestZooDatabase(unittest.TestCase):
         regions = set(['holarctic'])
         habitats = set(['tundra'])
         exp_result = {
-            'common name': common_names,
+            'common_name': common_names,
             'genus': 'canis',
             'family': 'canidae',
             'region': regions,
@@ -255,12 +255,12 @@ class TestZooDatabase(unittest.TestCase):
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
-            'number of animals': 1100,
+            'num_animals': 1100,
             'acres': 13,
-            'opening time': '9:00',
-            'closing time': '17:00',
-            'annual visitors': 175000,
-            'website url': 'http://abilenezoo.org/'
+            'opening_time': '9:00',
+            'closing_time': '17:00',
+            'annual_visitors': 175000,
+            'website_url': 'http://abilenezoo.org/'
         }
         result = self.zdb.get_zoo('Abilene_Zoo')
         self.assertEqual(result, exp_result)
@@ -271,12 +271,12 @@ class TestZooDatabase(unittest.TestCase):
             'city': 'Abilene',
             'state': 'TX',
             'address': '2070 Zoo Lane',
-            'number of animals': 1100,
+            'num_animals': 1100,
             'acres': 13,
-            'opening time': '9:00',
-            'closing time': '17:00',
-            'annual visitors': 200000,
-            'website url': 'http://abilenezoo.org/'
+            'opening_time': '9:00',
+            'closing_time': '17:00',
+            'annual_visitors': 200000,
+            'website_url': 'http://abilenezoo.org/'
         }
         self.zdb.put_zoo('Abilene_Zoo', 'annual visitors', 200000)
         result = self.zdb.get_zoo('Abilene_Zoo')
@@ -288,12 +288,12 @@ class TestZooDatabase(unittest.TestCase):
             'city': 'Yorba Linda',
             'state': 'CA',
             'address': '1234 Zoo Lane',
-            'number of animals': 777,
+            'num_animals': 777,
             'acres': 19,
-            'opening time': '9:00',
-            'closing time': '17:00',
-            'annual visitors': 45000,
-            'website url': 'http://zoo.org/'
+            'opening_time': '9:00',
+            'closing_time': '17:00',
+            'annual_visitors': 45000,
+            'website_url': 'http://zoo.org/'
         }
         self.zdb.post_zoo('Test_Zoo', exp_result)
         result = self.zdb.get_zoo('Test_Zoo')

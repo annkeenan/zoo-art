@@ -112,7 +112,7 @@ class _zoo_database:
         else:
             self.exhibit_zoo[zoo].update(species)
 
-        # Add the zoo to the species 
+        # Add the zoo to the species
         for _species in species:
             if _species not in self.exhibit_species:
                 self.exhibit_species[_species] = set()
@@ -185,7 +185,7 @@ class _zoo_database:
                 habitats = set(habitat.split(';'))
 
                 self.species[species] = {
-                    'common name': common_names,
+                    'common_name': common_names,
                     'genus': genus,
                     'family': family,
                     'region': regions,
@@ -226,7 +226,7 @@ class _zoo_database:
             if habitat not in self.habitat:
                 raise ValueError('"%s" is not an existing habitat' % habitat)
         # Convert lists to sets
-        info['common name'] = set(info['common name'])
+        info['common_name'] = set(info['common name'])
         info['region'] = set(info['region'])
         info['habitat'] = set(info['habitat'])
         self.species[new_species] = info
@@ -286,12 +286,12 @@ class _zoo_database:
                     'city': city,
                     'state': state,
                     'address': address,
-                    'number of animals': int(num_animals),
+                    'num_animals': int(num_animals),
                     'acres': int(acres),
-                    'opening time': opening_time,
-                    'closing time': closing_time,
-                    'annual visitors': int(annual_visitors),
-                    'website url': website_url
+                    'opening_time': opening_time,
+                    'closing_time': closing_time,
+                    'annual_visitors': int(annual_visitors),
+                    'website_url': website_url
                 }
 
     # Get a list of all zoos in alphabetical order
