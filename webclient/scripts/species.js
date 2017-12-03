@@ -7,12 +7,28 @@ function getSpecies() {
       var link = document.getElementById("editLink");
       link.setAttribute("href", "edit_species.html?species=" + speciesString);
       displaySpecies(response, speciesString);
+      getClassification(response[speciesString].family);
     }
   }
 
   var urlParams = new URLSearchParams(window.location.search);
   var speciesString = urlParams.get('species');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/species/" + speciesString, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/species/" + speciesString, true);
+  xmlHttp.send(null);
+
+}
+
+// get classification of an animals family
+function getClassification(family) {
+  var xmlHttp = new XMLHttpRequest();
+  xmlHttp.onreadystatechange = function() {
+    if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
+      response = JSON.parse(xmlHttp.response);
+      displayClassification(response);
+    }
+  }
+
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/classification/" + family, true);
   xmlHttp.send(null);
 }
 
@@ -26,7 +42,7 @@ function getExhibitSpecies() {
   }
   var urlParams = new URLSearchParams(window.location.search);
   var speciesString = urlParams.get('species');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/exhibit/" + speciesString, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/exhibit/" + speciesString, true);
   xmlHttp.send(null);
 }
 
@@ -41,6 +57,16 @@ function displaySpecies(data, name) {
   }
   html = $.parseHTML(speciesInfo);
   $('#speciesInfo').append(html);
+}
+
+// Add species info to the page
+function displayClassification(data) {
+  classificationInfo = '';
+  for (key in data.classification) {
+    classificationInfo+= '<p><b>' + key + '</b>' + ' '+ data.classification[key] + '</p>'
+  }
+  html = $.parseHTML(classificationInfo);
+  $('#classificationInfo').append(html);
 }
 
 // Add links to the page
