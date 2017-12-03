@@ -48,7 +48,7 @@ class TestExhibit(unittest.TestCase):
 
     def test_put_species(self):
         self.reset_data()
-        reqBody = {'status': 'EW', 'habitat': 'rainforest'}
+        reqBody = {'status': 'EW', 'habitat': ['rainforest']}
         r = requests.put(self.SPECIES_URL + 'ara_glaucogularis', data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())

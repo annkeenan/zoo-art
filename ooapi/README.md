@@ -78,7 +78,7 @@ post, and get methods.
 
 ```
 {
-  [zoo name]: ([species], [species], ...),
+  [zoo_name]: ([species], [species], ...),
   ...
 }
 ```
@@ -106,7 +106,7 @@ post, and get methods.
 ```
 {
   [species]: {
-    'Common Name': ([common name], [common name], ...),
+    'Common Name': ([common_name], [common_name], ...),
     'Genus': [genus],
     'Family': [family],
     'Region': [region],
@@ -142,16 +142,16 @@ post, and get methods.
 
 ```
 {
-  [zoo name]: {
+  [zoo_name]: {
     'City': [city],
     'State': [state abbreviation],
     'Address': [address],
-    'Number of Animals': [number of animals],
+    'Number of Animals': [num_animals],
     'Acres': [acres],
-    'Opening Time': [opening time],
-    'Closing Time': [closing time].
-    'Annual Visitors': [annual visitors],
-    'Website URL': [website url]
+    'Opening Time': [opening_time],
+    'Closing Time': [closing_time].
+    'Annual Visitors': [annual_visitors],
+    'Website URL': [website_url]
   },
   ...
 }

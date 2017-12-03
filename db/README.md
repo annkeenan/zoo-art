@@ -3,7 +3,7 @@
 ### Notes
 
 - if a column has more than one element, the elements are separated by semicolons
-- states, addresses, species names and zoo names are in title case
+- states, addresses, species names and zoo_names are in title case
 - state and status abbreviations are in all caps
 - open/close times are on a 24-hr clock
 - everything else is all in lowercase

@@ -103,6 +103,7 @@ function edit_zoo(zoo) {
       "annual_visitors": $('#id_annual_visitors').val(),
       "website_url": $('#id_website').val()
     });
+    console.log(dict);
 
     var xmlHttp = new XMLHttpRequest();
     xmlHttp.onreadystatechange = function() {

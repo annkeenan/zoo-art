@@ -21,7 +21,7 @@ class _species_controller(object):
         try:
             result = self.db.get_species(species)
             # sets converted to list for json output
-            result['common_name'] = sorted(list(result['common name']))
+            result['common_name'] = sorted(list(result['common_name']))
             result['region'] = sorted(list(result['region']))
             result['habitat'] = sorted(list(result['habitat']))
             output[species] = result
@@ -31,21 +31,23 @@ class _species_controller(object):
 
     def put_species(self, species):
         output = {'result': 'success'}
+        # Get the post data
         cl = cherrypy.request.headers['Content-Length']
-        rawbody = cherrypy.request.body.read()
+        rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
         data = json.loads(rawbody)
         try:
-            # loop through columns to update each for species
-            for column in data:
-                self.db.put_species(species, column, data[column])
+            # Loop through columns to update each for species
+            for column, value in data.items():
+                self.db.put_species(species, column, value)
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
 
     def post_species(self):
         output = {'result': 'success'}
+        # Get the post data
         cl = cherrypy.request.headers['Content-Length']
-        rawbody = cherrypy.request.body.read()
+        rawbody = cherrypy.request.body.read(int(cl)).decode('utf-8')
         data = json.loads(rawbody)
         try:
             self.db.post_species(data['species'], data['info'])
