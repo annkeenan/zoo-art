@@ -21,7 +21,7 @@ class _species_controller(object):
         try:
             result = self.db.get_species(species)
             # sets converted to list for json output
-            result['common name'] = sorted(list(result['common name']))
+            result['common_name'] = sorted(list(result['common name']))
             result['region'] = sorted(list(result['region']))
             result['habitat'] = sorted(list(result['habitat']))
             output[species] = result

@@ -48,11 +48,8 @@ class TestExhibit(unittest.TestCase):
 
     def test_put_species(self):
         self.reset_data()
-        reqBody = {}
-        reqBody['status'] = 'EW'
-        reqBody['habitat'] = ['rainforest']
-        r = requests.put(self.SPECIES_URL + 'ara_glaucogularis',
-                         data=json.dumps(reqBody))
+        reqBody = {'status': 'EW', 'habitat': 'rainforest'}
+        r = requests.put(self.SPECIES_URL + 'ara_glaucogularis', data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
@@ -71,14 +68,15 @@ class TestExhibit(unittest.TestCase):
 
     def test_post_species(self):
         self.reset_data()
-        reqBody = {}
-        reqBody = {'species': 'canis_dirus', 'info': {
-            'common_name': ['Dire wolf'],
-            'genus': 'canis',
-            'family': 'canidae',
-            'region': ['holarctic'],
-            'habitat': ['tundra'],
-            'status': 'EX'}}
+        reqBody = {
+            'species': 'canis_dirus',
+            'info': {
+                'common_name': ['Dire wolf'],
+                'genus': 'canis',
+                'family': 'canidae',
+                'region': ['holarctic'],
+                'habitat': ['tundra'],
+                'status': 'EX'}}
 
         r = requests.post(self.SPECIES_URL, data=json.dumps(reqBody))
         self.assertTrue(self.is_json(r.content.decode()))
