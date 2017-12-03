@@ -15,8 +15,6 @@ function add_zoo() {
         response = JSON.parse(xmlHttp.response);
         if (response.result == 'success') {
           state_info = response.states;
-        } else {
-          state_info = {}
         }
         createForm();
       }
