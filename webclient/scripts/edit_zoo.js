@@ -119,5 +119,6 @@ $(document).ready(function() {
   let params = (new URL(document.location)).searchParams;
   let zoo = params.get("zoo");
   $('#id_title').html(zoo.split('_').join(' '));
+  $('#id_cancel').attr('href','zoo.html?zoo='+zoo);
   edit_zoo(zoo);
 });
