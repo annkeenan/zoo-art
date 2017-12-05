@@ -12,7 +12,7 @@ function getZoo() {
 
   var urlParams = new URLSearchParams(window.location.search);
   var zooString = urlParams.get('zoo');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/zoo/" + zooString, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/zoo/" + zooString, true);
   xmlHttp.send(null);
 }
 
@@ -26,8 +26,12 @@ function getExhibitZoo() {
   }
   var urlParams = new URLSearchParams(window.location.search);
   var zooString = urlParams.get('zoo');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/exhibit/" + zooString + "/true", true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/exhibit/" + zooString + "/true", true);
   xmlHttp.send(null);
+}
+
+function deleteSpecies(args) {
+  alert('update display' + args);
 }
 
 
@@ -45,10 +49,10 @@ function displayZoo(data, name) {
 
 // Add links to the page
 function createLinks(data) {
-  links = '<ul>';
+  links = '<ul class="fa-ul">';
   for (var i in data.species) {
     species_name = data.species[i].replace('_', ' ');
-    links += '<li><a href="species.html?species=' + data.species[i] + '">' + species_name + '</a></li>'
+    links += '<li><span onclick="deleteSpecies('+ '\'' + data.species[i] + '\'' +')"><i class="fa fa-trash" aria-hidden="true"></i></span><a href="species.html?species=' + data.species[i] + '">' + species_name + '</a></li>'
   }
   links += '</ul>';
   html = $.parseHTML(links);
