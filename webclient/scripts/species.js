@@ -52,8 +52,8 @@ function displaySpecies(data, name) {
   var speciesName = name.split('_').join(' ');
   $('#speciesName').append(speciesName);
   speciesInfo = '';
-  for (key in data[name]) {
-    var keystring = data[name][key]
+  for (key in data.species) {
+    var keystring = data.species[key]
     var spacecomma = keystring.toString().replace(/,/g, ",  ");
     var newkeystring = spacecomma.toString().replace(/_/g, " ");
     if (key == 'common_name') {

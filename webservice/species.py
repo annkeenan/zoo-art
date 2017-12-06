@@ -24,7 +24,7 @@ class _species_controller(object):
             result['common_name'] = sorted(list(result['common_name']))
             result['region'] = sorted(list(result['region']))
             result['habitat'] = sorted(list(result['habitat']))
-            output[species] = result
+            output['species'] = result
         except Exception as e:
             output = {'result': 'error', 'message': str(e)}
         return json.dumps(output)
