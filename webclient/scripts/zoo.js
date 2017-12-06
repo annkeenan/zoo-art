@@ -64,7 +64,6 @@ function addSpecies(args) {
       getExhibitZoo();
     }
   }
-  alert(args);
   var dict  = JSON.stringify({
     "species": [args]
   });
@@ -90,7 +89,7 @@ function displayZoo(data, name) {
 function createLinks(data) {
   links = '<ul class="fa-ul">';
   for (var i in data.species) {
-    species_name = data.species[i].replace('_', ' ');
+    species_name = data.species[i].split('_').join(' ');
     links += '<li><span onclick="deleteSpecies('+ '\'' + data.species[i] + '\'' +')"><i class="fa fa-trash" aria-hidden="true"></i></span><a href="species.html?species=' + data.species[i] + '">' + species_name + '</a></li>'
   }
   links += '</ul>';
@@ -103,7 +102,7 @@ function createLinks(data) {
 function fillDropDown(data) {
   dropdownitems = '';
   for (var i in data.species) {
-    species_name = data.species[i].replace('_', ' ');
+    species_name = data.species[i].split('_').join(' ');
     dropdownitems += '<li><a onclick="addSpecies('+ '\'' + data.species[i] + '\'' +')"><i class="fa fa-plus-circle" aria-hidden="true"></i> '+ species_name +'</a></li>'
   }
   html = $.parseHTML(dropdownitems);
