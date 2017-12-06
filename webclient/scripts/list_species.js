@@ -15,7 +15,7 @@ function getSpecies() {
 function createLinks(data) {
   links = '<ul>';
   for (var i in data.species) {
-    species_name = data.species[i].replace('_', ' ');
+    species_name = data.species[i].split('_').join(' ');
     links += '<li><a href="species.html?species=' + data.species[i] + '">' + species_name + '</a></li>'
   }
   links += '</ul>';
