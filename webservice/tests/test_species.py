@@ -38,7 +38,7 @@ class TestExhibit(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['ara_glaucogularis'], {
+        self.assertEqual(resp['species'], {
             'common_name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
@@ -58,7 +58,7 @@ class TestExhibit(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['ara_glaucogularis'], {
+        self.assertEqual(resp['species'], {
             'common_name': ['Blue-Throated Macaw', 'Caninde Macaw', 'Wagler\'s Macaw'],
             'genus': 'ara',
             'family': 'psittacidae',
@@ -86,7 +86,7 @@ class TestExhibit(unittest.TestCase):
         self.assertTrue(self.is_json(r.content.decode()))
         resp = json.loads(r.content.decode())
         self.assertEqual(resp['result'], 'success')
-        self.assertEqual(resp['canis_dirus'], {
+        self.assertEqual(resp['species'], {
             'common_name': ['Dire wolf'],
             'genus': 'canis',
             'family': 'canidae',
