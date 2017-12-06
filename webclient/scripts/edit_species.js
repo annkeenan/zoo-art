@@ -132,7 +132,7 @@ function edit_species(species) {
     // Set dropdown values
     // Set edit text values
     $('#id_common_name').val(species_info.common_name);
-    $('#id_genus'),val(species_info.genus);
+    $('#id_genus').val(species_info.genus);
     $('#id_family').val(species_info.family);
     $('#id_region').val(species_info.region);
     $('#id_habitat').val(species_info.habitat);
@@ -140,7 +140,7 @@ function edit_species(species) {
   }
 
   function processForm() {
-    common_name = $('#id_common_name').val().split(' ').join('_');
+    common_name = $('#id_common_name').val().split(';');
     var dict = JSON.stringify({
       "common_name": common_name,
       "genus": $('#id_genus').val(),
