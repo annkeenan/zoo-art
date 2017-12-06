@@ -140,7 +140,7 @@ function edit_species(species) {
   }
 
   function processForm() {
-    common_name = $('#id_common_name').val().split(';');
+    common_name = $('#id_common_name').val().split(',');
     var dict = JSON.stringify({
       "common_name": common_name,
       "genus": $('#id_genus').val(),

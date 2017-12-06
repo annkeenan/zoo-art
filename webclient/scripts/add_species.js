@@ -116,7 +116,7 @@ function add_species(species) {
 
   function processForm() {
     species_name = $('#id_species_name').val().split(' ').join('_');
-    common_name = $('#id_common_name').val().split(';');
+    common_name = $('#id_common_name').val().split(',');
     var dict = JSON.stringify({
       "species": species_name,
       "info": {
