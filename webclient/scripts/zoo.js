@@ -79,7 +79,8 @@ function displayZoo(data, name) {
   $('#zooName').append(zooName);
   zooInfo = '';
   for (key in data.zoo) {
-    zooInfo+= '<p><b>' + key + '</b>' + ' '+ data.zoo[key] + '</p>'
+    infokey = key.split('_').join(' ');
+    zooInfo+= '<p><b>' + infokey + '</b>' + ' '+ data.zoo[key] + '</p>'
   }
   html = $.parseHTML(zooInfo);
   $('#zooInfo').append(html);
