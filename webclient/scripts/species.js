@@ -7,7 +7,7 @@ function getSpecies() {
       var link = document.getElementById("editLink");
       link.setAttribute("href", "edit_species.html?species=" + speciesString);
       displaySpecies(response, speciesString);
-      getClassification(response[speciesString].family);
+      getClassification(response.species.family);
     }
   }
 
