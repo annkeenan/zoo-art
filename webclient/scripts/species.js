@@ -13,7 +13,7 @@ function getSpecies() {
 
   var urlParams = new URLSearchParams(window.location.search);
   var speciesString = urlParams.get('species');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/species/" + speciesString, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/species/" + speciesString, true);
   xmlHttp.send(null);
 
 }
@@ -28,7 +28,7 @@ function getClassification(family) {
     }
   }
 
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/classification/" + family, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/classification/" + family, true);
   xmlHttp.send(null);
 }
 
@@ -42,7 +42,7 @@ function getExhibitSpecies() {
   }
   var urlParams = new URLSearchParams(window.location.search);
   var speciesString = urlParams.get('species');
-  xmlHttp.open("GET", "http://student04.cse.nd.edu:51056/exhibit/" + speciesString, true);
+  xmlHttp.open("GET", "http://student04.cse.nd.edu:51042/exhibit/" + speciesString, true);
   xmlHttp.send(null);
 }
 
@@ -53,7 +53,13 @@ function displaySpecies(data, name) {
   $('#speciesName').append(speciesName);
   speciesInfo = '';
   for (key in data[name]) {
-    speciesInfo+= '<p><b>' + key + '</b>' + ' '+ data[name][key] + '</p>'
+    var keystring = data[name][key]
+    var spacecomma = keystring.toString().replace(/,/g, ",  ");
+    var newkeystring = spacecomma.toString().replace(/_/g, " ");
+    if (key == 'common_name') {
+        key = 'common name'
+    }
+    speciesInfo+= '<p><b>' + key + '</b>' + ' '+ newkeystring + '</p>'
   }
   html = $.parseHTML(speciesInfo);
   $('#speciesInfo').append(html);
@@ -63,7 +69,10 @@ function displaySpecies(data, name) {
 function displayClassification(data) {
   classificationInfo = '';
   for (key in data.classification) {
-    classificationInfo+= '<p><b>' + key + '</b>' + ' '+ data.classification[key] + '</p>'
+    var keystring = data.classification[key]
+    var spacecomma = keystring.toString().replace(/,/g, ", ");
+    var newkeystring = spacecomma.toString().replace(/_/g, " ");
+    classificationInfo+= '<p><b>' + key + '</b>' + ' '+ newkeystring + '</p>'
   }
   html = $.parseHTML(classificationInfo);
   $('#classificationInfo').append(html);
