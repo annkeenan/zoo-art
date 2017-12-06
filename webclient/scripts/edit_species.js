@@ -86,7 +86,7 @@ function edit_species(species) {
       if (xmlHttp.readyState == 4 && xmlHttp.status == 200) {
         response = JSON.parse(xmlHttp.response);
         if (response.result == 'success') {
-          family_info = response.classification;
+          family_info = response.families;
         } else {
           family_info = {}
         }
