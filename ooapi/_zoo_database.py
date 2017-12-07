@@ -78,19 +78,16 @@ class _zoo_database:
         if zoo in self.exhibit_zoo:
             return sorted(self.exhibit_zoo[zoo])
         else:
-            return None
+            return []
 
     # Get the species that are not at a zoo
     def get_not_exhibited_zoo(self, zoo):
         exhibited_species = self.get_exhibited_zoo(zoo)
-        if zoo in self.exhibit_zoo:
-            not_exhibited = []
-            for _species in self.species:
-                if _species not in exhibited_species:
-                    not_exhibited.append(_species)
-            return not_exhibited
-        else:
-            return None
+        not_exhibited = []
+        for _species in self.species:
+            if _species not in exhibited_species:
+                not_exhibited.append(_species)
+        return not_exhibited
 
 	# Get all the zoos that a species are in
     def get_exhibits_species(self, species):
@@ -118,8 +115,9 @@ class _zoo_database:
         for _species in species:
             if _species not in self.exhibit_species:
                 self.exhibit_species[_species] = set()
+                self.exhibit_species[_species].add(zoo)
             else:
-                self.exhibit_species[_species].update(zoo)
+                self.exhibit_species[_species].add(zoo)
 
     # Remove an animal from a zoo exhibit and remove that zoo from that animal
     def delete_exhibit(self, zoo, species):
